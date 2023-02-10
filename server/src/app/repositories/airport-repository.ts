@@ -1,8 +1,8 @@
-import { Airport } from '@app/entities/airport';
+import { IAirport } from '@app/entities/airport/IAirport';
 
 export abstract class AirportRepository {
-  abstract create(airport: Airport): Promise<void>;
-  abstract findById(airportId: string): Promise<Airport | null>;
-  abstract save(airport: Airport): Promise<void>;
-  abstract findAll(): Promise<Airport[]>;
+  abstract create(airport: IAirport): Promise<void>;
+  abstract findById(airportId: string): Promise<IAirport | null>;
+  abstract save(airport: IAirport): Promise<void>;
+  abstract findAll(): Promise<IAirport[]>;
 }
