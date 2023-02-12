@@ -23,12 +23,14 @@ model Airport {
 }
 
 model Aircraft {
-  id              String  @id
-  code            String  @unique
+  id              String   @id
+  code            String   @unique
   firstSeatNumber Int
   lastSeatNumber  Int
   firstSeatLetter String
   lastSeatLetter  String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
   Flight          Flight?
 
   @@index([code])
@@ -36,11 +38,13 @@ model Aircraft {
 }
 
 model Seat {
-  id          String  @id
+  id          String   @id
   flightId    String
   seatTypeId  String
   passengerId String?
   code        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 
   flight    Flight     @relation(fields: [flightId], references: [id])
   seatType  SeatType   @relation(fields: [seatTypeId], references: [id])
@@ -51,10 +55,12 @@ model Seat {
 }
 
 model SeatType {
-  id    String @id
-  name  String
-  price String
-  seat  Seat[]
+  id        String   @id
+  name      String
+  price     String
+  seat      Seat[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   @@map("seat_types")
 }
@@ -69,6 +75,8 @@ model Passenger {
   passport  String
   cpf       String
   group     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   flight Flight @relation(fields: [flightId], references: [id])
   seat   Seat[]
@@ -81,6 +89,8 @@ model Route {
   airportIdTo String   @unique
   duration    String
   Flight      Flight[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 
   airportTo Airport @relation(fields: [airportIdTo], references: [id])
 
@@ -99,6 +109,8 @@ model Flight {
   gate               String
   seats              Seat[]
   passenger          Passenger[]
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @default(now())
 
   route    Route    @relation(fields: [routeId], references: [id])
   aircraft Aircraft @relation(fields: [aircraftCode], references: [code])
