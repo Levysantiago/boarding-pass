@@ -9,10 +9,8 @@ export class PrismaAirportRepository implements AirportRepository {
   constructor(private prismaService: PrismaService) {}
 
   async create(airport: Airport): Promise<void> {
-    const raw = PrismaAirportMapper.toPrisma(airport);
-
     await this.prismaService.airport.create({
-      data: raw,
+      data: airport,
     });
   }
 
