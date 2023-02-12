@@ -1,4 +1,4 @@
-import { IAirport } from '@app/entities/airport/IAirport';
+import { Airport } from '@app/entities/airport';
 import { AirportRepository } from '@app/repositories/airport-repository';
 import { Injectable } from '@nestjs/common';
 import { PrismaAirportMapper } from '../mappers/prisma-airport-mapper';
@@ -8,7 +8,7 @@ import { PrismaService } from '../prisma.service';
 export class PrismaAirportRepository implements AirportRepository {
   constructor(private prismaService: PrismaService) {}
 
-  async create(airport: IAirport): Promise<void> {
+  async create(airport: Airport): Promise<void> {
     const raw = PrismaAirportMapper.toPrisma(airport);
 
     await this.prismaService.airport.create({
@@ -16,7 +16,7 @@ export class PrismaAirportRepository implements AirportRepository {
     });
   }
 
-  async findById(airportId: string): Promise<IAirport> {
+  async findById(airportId: string): Promise<Airport> {
     const raw = await this.prismaService.airport.findUnique({
       where: { id: airportId },
     });
@@ -24,7 +24,7 @@ export class PrismaAirportRepository implements AirportRepository {
     return PrismaAirportMapper.fromPrisma(raw);
   }
 
-  async save(airport: IAirport): Promise<void> {
+  async save(airport: Airport): Promise<void> {
     const raw = PrismaAirportMapper.toPrisma(airport);
 
     await this.prismaService.airport.update({
@@ -33,7 +33,7 @@ export class PrismaAirportRepository implements AirportRepository {
     });
   }
 
-  async findAll(): Promise<IAirport[]> {
+  async findAll(): Promise<Airport[]> {
     const airports = await this.prismaService.airport.findMany();
     return airports.map(PrismaAirportMapper.fromPrisma);
   }

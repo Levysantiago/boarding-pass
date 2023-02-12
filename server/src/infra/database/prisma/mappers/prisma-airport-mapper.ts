@@ -1,9 +1,8 @@
 import { Airport } from '@app/entities/airport';
-import { IAirport } from '@app/entities/airport/IAirport';
 import { Airport as RawAirport } from '@prisma/client';
 
 export class PrismaAirportMapper {
-  static toPrisma(airport: IAirport) {
+  static toPrisma(airport: Airport) {
     return {
       id: airport.id,
       city: airport.city,
@@ -14,7 +13,7 @@ export class PrismaAirportMapper {
     };
   }
 
-  static fromPrisma(rawAirport: RawAirport): IAirport {
+  static fromPrisma(rawAirport: RawAirport): Airport {
     return new Airport(
       {
         city: rawAirport.city,

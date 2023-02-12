@@ -1,46 +1,32 @@
+import { Exclude, instanceToPlain } from 'class-transformer';
 import { randomUUID } from 'crypto';
-import { IAirport } from './IAirport';
-import { ICreateAirportDTO } from './ICreateAirportDTO';
+import { ICreateAirportDTO } from './dto/icreate-airport-dto';
 
-interface IAirportProps extends ICreateAirportDTO {
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-export class Airport implements IAirport {
-  private _id: string;
-  private props: IAirportProps;
-
+export class Airport {
   constructor(props: ICreateAirportDTO, id?: string) {
-    this._id = id ?? randomUUID();
-    this.props = {
-      ...props,
-      createdAt: props.createdAt ?? new Date(),
-      updatedAt: props.updatedAt ?? new Date(),
-    };
+    this.id = id ?? randomUUID();
+    this.city = props.city;
+    this.state = props.state;
+    this.country = props.country;
+    this.createdAt = props.createdAt ?? new Date();
+    this.updatedAt = props.updatedAt ?? new Date();
   }
 
-  get id() {
-    return this._id;
-  }
+  id: string;
 
-  get city(): string {
-    return this.props.city;
-  }
+  state: string;
 
-  get state(): string {
-    return this.props.state;
-  }
+  city: string;
 
-  get country(): string {
-    return this.props.country;
-  }
+  country: string;
 
-  get createdAt(): Date {
-    return this.props.createdAt;
-  }
+  @Exclude()
+  createdAt: Date;
 
-  get updatedAt(): Date {
-    return this.props.updatedAt;
+  @Exclude()
+  updatedAt: Date;
+
+  toHTTP(): Airport {
+    return instanceToPlain(this) as Airport;
   }
 }
