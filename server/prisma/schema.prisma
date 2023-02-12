@@ -17,4 +17,91 @@ model Airport {
   country   String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  Route     Route?
+
+  @@map("airports")
+}
+
+model Aircraft {
+  id              String  @id
+  code            String  @unique
+  firstSeatNumber Int
+  lastSeatNumber  Int
+  firstSeatLetter String
+  lastSeatLetter  String
+  Flight          Flight?
+
+  @@index([code])
+  @@map("aircrafts")
+}
+
+model Seat {
+  id          String  @id
+  flightId    String
+  seatTypeId  String
+  passengerId String?
+  code        String
+
+  flight    Flight     @relation(fields: [flightId], references: [id])
+  seatType  SeatType   @relation(fields: [seatTypeId], references: [id])
+  passenger Passenger? @relation(fields: [passengerId], references: [id])
+
+  @@index([flightId, passengerId])
+  @@map("seats")
+}
+
+model SeatType {
+  id    String @id
+  name  String
+  price String
+  seat  Seat[]
+
+  @@map("seat_types")
+}
+
+model Passenger {
+  id        String   @id
+  flightId  String
+  firstName String
+  lastName  String
+  birthDate DateTime
+  gender    String
+  passport  String
+  cpf       String
+  group     String
+
+  flight Flight @relation(fields: [flightId], references: [id])
+  seat   Seat[]
+
+  @@map("passengers")
+}
+
+model Route {
+  id          String   @id
+  airportIdTo String   @unique
+  duration    String
+  Flight      Flight[]
+
+  airportTo Airport @relation(fields: [airportIdTo], references: [id])
+
+  @@map("routes")
+}
+
+model Flight {
+  id                 String      @id
+  routeId            String
+  aircraftCode       String      @unique
+  finishBookingTime  DateTime
+  boardingTime       DateTime
+  boardingEndingTime DateTime
+  flightTime         DateTime
+  terminal           String
+  gate               String
+  seats              Seat[]
+  passenger          Passenger[]
+
+  route    Route    @relation(fields: [routeId], references: [id])
+  aircraft Aircraft @relation(fields: [aircraftCode], references: [code])
+
+  @@map("flights")
 }
