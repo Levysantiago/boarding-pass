@@ -1,7 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
-import { ICreateAirportDTO } from './icreate-airport-dto';
 
-export class CreateAirportDTO implements ICreateAirportDTO {
+export class CreateAirportDTO {
   @IsNotEmpty()
   city: string;
 

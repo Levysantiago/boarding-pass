@@ -5,14 +5,8 @@ export class CreateAircraftDTO {
   code: string;
 
   @IsNotEmpty()
-  firstSeatNumber: number;
+  firstSeat: string;
 
   @IsNotEmpty()
-  lastSeatNumber: number;
-
-  @IsNotEmpty()
-  firstSeatLetter: string;
-
-  @IsNotEmpty()
-  lastSeatLetter: string;
+  lastSeat: string;
 }

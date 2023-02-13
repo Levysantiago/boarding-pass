@@ -23,15 +23,13 @@ model Airport {
 }
 
 model Aircraft {
-  id              String   @id
-  code            String   @unique
-  firstSeatNumber Int
-  lastSeatNumber  Int
-  firstSeatLetter String
-  lastSeatLetter  String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @default(now())
-  Flight          Flight?
+  id        String   @id
+  code      String   @unique
+  firstSeat String
+  lastSeat  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  Flight    Flight?
 
   @@index([code])
   @@map("aircrafts")
@@ -43,6 +41,7 @@ model Seat {
   seatTypeId  String
   passengerId String?
   code        String
+  side        String //window | middle | corridor
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now())
 

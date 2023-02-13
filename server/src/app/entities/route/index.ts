@@ -1,19 +1,17 @@
 import { Exclude } from 'class-transformer';
 import { randomUUID } from 'crypto';
 
-interface ICreateAircraftProps {
-  code: string;
-  firstSeat: string;
-  lastSeat: string;
+interface IRouteProps {
+  airportIdTo: string;
+  duration: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-export class Aircraft {
-  constructor(props: ICreateAircraftProps, id?: string) {
-    this.code = props.code;
-    this.firstSeat = props.firstSeat;
-    this.lastSeat = props.lastSeat;
+export class Route {
+  constructor(props: IRouteProps, id?: string) {
+    this.airportIdTo = props.airportIdTo;
+    this.duration = props.duration;
 
     this.id = id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
@@ -23,11 +21,9 @@ export class Aircraft {
   @Exclude()
   id: string;
 
-  code: string;
+  airportIdTo: string;
 
-  firstSeat: string;
-
-  lastSeat: string;
+  duration: string;
 
   @Exclude()
   createdAt: Date;

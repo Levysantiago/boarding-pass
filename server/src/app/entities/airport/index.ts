@@ -1,9 +1,16 @@
 import { Exclude, instanceToPlain } from 'class-transformer';
 import { randomUUID } from 'crypto';
-import { ICreateAirportDTO } from './dto/icreate-airport-dto';
+
+interface ICreateAirportProps {
+  city: string;
+  state: string;
+  country: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 export class Airport {
-  constructor(props: ICreateAirportDTO, id?: string) {
+  constructor(props: ICreateAirportProps, id?: string) {
     this.id = id ?? randomUUID();
     this.city = props.city;
     this.state = props.state;
