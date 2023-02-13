@@ -1,4 +1,4 @@
-import { CreateAirportDTO } from '@app/entities/airport/dto/create-airport-dto';
+import { CreateAirportDTO } from '@app/entities/airport/create-airport-dto';
 import { CreateAirportService } from '@app/services/airport/create-airport-service';
 import { ListAirportsService } from '@app/services/airport/list-airports-service';
 import { Body, Controller, Get, Post } from '@nestjs/common';

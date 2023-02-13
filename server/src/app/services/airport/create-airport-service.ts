@@ -1,5 +1,5 @@
 import { Airport } from '@app/entities/airport';
-import { CreateAirportDTO } from '@app/entities/airport/dto/create-airport-dto';
+import { CreateAirportDTO } from '@app/entities/airport/create-airport-dto';
 import { AirportRepository } from '@app/repositories/airport-repository';
 import { Injectable } from '@nestjs/common';
 
