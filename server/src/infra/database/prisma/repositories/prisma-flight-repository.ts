@@ -25,9 +25,13 @@ export class PrismaFlightRepository implements FlightRepository {
     });
   }
 
-  async findAll(query?: { routeId: string }): Promise<Flight[]> {
+  async findAll(): Promise<Flight[]> {
     const airports = await this.prismaService.flight.findMany({
-      where: query,
+      include: {
+        route: {
+          select: { duration: true },
+        },
+      },
     });
     return airports.map(PrismaFlightMapper.fromPrisma);
   }

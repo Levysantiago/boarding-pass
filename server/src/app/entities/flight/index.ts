@@ -1,3 +1,4 @@
+import { Airport } from '@prisma/client';
 import { Exclude, instanceToPlain } from 'class-transformer';
 import { randomUUID } from 'crypto';
 
@@ -12,6 +13,7 @@ interface IFlightProps {
   gate: string;
   createdAt?: Date;
   updatedAt?: Date;
+  route?: { route: string; airportFrom?: Airport; airportTo?: Airport };
 }
 
 export class Flight {
@@ -24,6 +26,7 @@ export class Flight {
     this.flightTime = props.flightTime;
     this.terminal = props.terminal;
     this.gate = props.gate;
+    this.route = props.route;
 
     this.id = id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
@@ -49,6 +52,8 @@ export class Flight {
   terminal: string;
 
   gate: string;
+
+  route?: { route: string; airportFrom?: Airport; airportTo?: Airport };
 
   @Exclude()
   createdAt: Date;

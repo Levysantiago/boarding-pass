@@ -14,12 +14,12 @@ export class PrismaAirportRepository implements AirportRepository {
     });
   }
 
-  async findById(airportId: string): Promise<Airport> {
+  async findById(airportId: string): Promise<Airport | null> {
     const raw = await this.prismaService.airport.findUnique({
       where: { id: airportId },
     });
 
-    return PrismaAirportMapper.fromPrisma(raw);
+    return raw ? PrismaAirportMapper.fromPrisma(raw) : null;
   }
 
   async save(airport: Airport): Promise<void> {
