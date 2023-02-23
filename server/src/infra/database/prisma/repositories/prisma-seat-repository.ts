@@ -10,7 +10,7 @@ export class PrismaSeatRepository implements SeatRepository {
 
   async create(seat: Seat): Promise<void> {
     await this.prismaService.seat.create({
-      data: seat,
+      data: PrismaSeatMapper.toPrisma(seat),
     });
   }
 

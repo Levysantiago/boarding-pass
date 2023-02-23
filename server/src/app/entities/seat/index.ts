@@ -1,5 +1,6 @@
 import { Exclude, instanceToPlain } from 'class-transformer';
 import { randomUUID } from 'crypto';
+import { SeatType } from '../seat-type';
 
 interface ICreateSeatProps {
   flightId: string;
@@ -8,6 +9,8 @@ interface ICreateSeatProps {
   code: string;
   /** window | middle | corridor */
   side: 'window' | 'middle' | 'corridor';
+  occupied: boolean;
+  seatType?: SeatType;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -17,8 +20,10 @@ export class Seat {
     this.flightId = props.flightId;
     this.seatTypeId = props.seatTypeId;
     this.passengerId = props.passengerId;
+    props.passengerId ? (this.occupied = true) : (this.occupied = false);
     this.code = props.code;
     this.side = props.side;
+    this.seatType = new SeatType(props.seatType);
 
     this.id = id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
@@ -30,13 +35,19 @@ export class Seat {
 
   flightId: string;
 
+  @Exclude()
   seatTypeId: string;
 
+  @Exclude()
   passengerId?: string;
 
   code: string;
 
   side: 'window' | 'middle' | 'corridor';
+
+  occupied: boolean;
+
+  seatType?: SeatType;
 
   @Exclude()
   createdAt: Date;
@@ -45,6 +56,8 @@ export class Seat {
   updatedAt: Date;
 
   toHTTP(): Seat {
-    return instanceToPlain(this) as Seat;
+    const seat = new Seat(this);
+    if (seat.seatType) seat.seatType = seat.seatType.toHTTP();
+    return instanceToPlain(seat) as Seat;
   }
 }

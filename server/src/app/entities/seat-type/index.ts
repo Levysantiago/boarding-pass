@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer';
+import { Exclude, instanceToPlain } from 'class-transformer';
 import { randomUUID } from 'crypto';
 
 interface ICreateSeatTypeProps {
@@ -30,4 +30,8 @@ export class SeatType {
 
   @Exclude()
   updatedAt: Date;
+
+  toHTTP(): SeatType {
+    return instanceToPlain(this) as SeatType;
+  }
 }

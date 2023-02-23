@@ -1,13 +1,21 @@
 import { Flight } from '@app/entities/flight';
+import { Seat } from '@app/entities/seat';
 import { Flight as RawFlight } from '@prisma/client';
 
 export class PrismaFlightMapper {
   static toPrisma(flight: Flight): RawFlight {
-    const { route, ...raw } = flight;
+    const { route, seats, ...raw } = flight;
     return raw;
   }
 
   static fromPrisma(rawFlight: RawFlight): Flight {
-    return new Flight(rawFlight, rawFlight.id);
+    const flight = new Flight(rawFlight, rawFlight.id);
+
+    // Configuring seats
+    flight.seats = flight.seats.map((seat) => {
+      return new Seat(seat);
+    });
+
+    return flight;
   }
 }

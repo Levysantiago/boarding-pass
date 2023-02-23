@@ -12,7 +12,11 @@ export class PrismaFlightRepository implements FlightRepository {
     const raw = await this.prismaService.flight.findUnique({
       where: { id: flightId },
       include: {
-        seats: true,
+        seats: {
+          include: {
+            seatType: true,
+          },
+        },
       },
     });
 
