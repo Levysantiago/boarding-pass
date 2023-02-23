@@ -33,7 +33,6 @@ export class Flight {
     this.updatedAt = props.updatedAt ?? new Date();
   }
 
-  @Exclude()
   id: string;
 
   @Exclude()

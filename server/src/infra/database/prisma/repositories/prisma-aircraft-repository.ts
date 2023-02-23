@@ -22,6 +22,14 @@ export class PrismaAircraftRepository implements AircraftRepository {
     return PrismaAircraftMapper.fromPrisma(raw);
   }
 
+  async findByCode(aircraftCode: string): Promise<Aircraft> {
+    const raw = await this.prismaService.aircraft.findUnique({
+      where: { code: aircraftCode },
+    });
+
+    return PrismaAircraftMapper.fromPrisma(raw);
+  }
+
   async save(aircraft: Aircraft): Promise<void> {
     const raw = PrismaAircraftMapper.toPrisma(aircraft);
 

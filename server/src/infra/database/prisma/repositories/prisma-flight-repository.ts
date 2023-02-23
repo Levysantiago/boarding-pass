@@ -11,6 +11,9 @@ export class PrismaFlightRepository implements FlightRepository {
   async findById(flightId: string): Promise<Flight | null> {
     const raw = await this.prismaService.flight.findUnique({
       where: { id: flightId },
+      include: {
+        seats: true,
+      },
     });
 
     return PrismaFlightMapper.fromPrisma(raw);
