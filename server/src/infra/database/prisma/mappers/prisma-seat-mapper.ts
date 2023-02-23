@@ -3,7 +3,8 @@ import { Seat as RawSeat } from '@prisma/client';
 
 export class PrismaSeatMapper {
   static toPrisma(seat: Seat): RawSeat {
-    return seat as RawSeat;
+    const { occupied, ...raw } = seat;
+    return raw as RawSeat;
   }
 
   static fromPrisma(rawSeat: RawSeat): Seat {

@@ -31,9 +31,9 @@ export class PrismaSeatRepository implements SeatRepository {
     });
   }
 
-  async findByFlightId(flightId: string): Promise<Seat[]> {
+  async findAll(query?: { flightId?: string; code?: string }): Promise<Seat[]> {
     const seats = await this.prismaService.seat.findMany({
-      where: { flightId },
+      where: query,
     });
     return seats.map(PrismaSeatMapper.fromPrisma);
   }

@@ -23,7 +23,7 @@ export class Seat {
     props.passengerId ? (this.occupied = true) : (this.occupied = false);
     this.code = props.code;
     this.side = props.side;
-    this.seatType = new SeatType(props.seatType);
+    if (this.seatType) new SeatType(props.seatType);
 
     this.id = id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();

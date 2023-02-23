@@ -13,7 +13,7 @@ export class CreatePassengerDTO {
   lastName: string;
 
   @IsNotEmpty()
-  birthDate: Date;
+  birthDate: string;
 
   @IsNotEmpty()
   gender: string;
@@ -26,6 +26,6 @@ export class CreatePassengerDTO {
   cpf: string;
 
   @IsNotEmpty()
-  @MaxLength(2)
-  group: string;
+  @MaxLength(5)
+  seatCode: string;
 }

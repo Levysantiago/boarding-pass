@@ -1,4 +1,5 @@
-import { Exclude } from 'class-transformer';
+import { Exclude, instanceToPlain } from 'class-transformer';
+import { randomUUID } from 'crypto';
 
 interface IPassengerProps {
   flightId: string;
@@ -15,7 +16,18 @@ interface IPassengerProps {
 
 export class Passenger {
   constructor(props: IPassengerProps, id?: string) {
-    this.flightId;
+    this.firstName = props.firstName;
+    this.lastName = props.lastName;
+    this.birthDate = props.birthDate;
+    this.gender = props.gender;
+    this.passport = props.passport;
+    this.group = props.group;
+    this.flightId = props.flightId;
+    this.cpf = props.cpf;
+
+    this.id = id ?? randomUUID();
+    this.createdAt = props.createdAt ?? new Date();
+    this.updatedAt = props.updatedAt ?? new Date();
   }
 
   @Exclude()
@@ -43,4 +55,8 @@ export class Passenger {
 
   @Exclude()
   updatedAt: Date;
+
+  toHTTP(): Passenger {
+    return instanceToPlain(this) as Passenger;
+  }
 }
