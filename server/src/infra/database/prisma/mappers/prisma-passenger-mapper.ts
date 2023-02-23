@@ -3,7 +3,8 @@ import { Passenger as RawPassenger } from '@prisma/client';
 
 export class PrismaPassengerMapper {
   static toPrisma(passenger: Passenger) {
-    return passenger;
+    const { seat, flight, ..._passenger } = passenger;
+    return _passenger;
   }
 
   static fromPrisma(rawPassenger: RawPassenger): Passenger {

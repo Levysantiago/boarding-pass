@@ -1,5 +1,9 @@
 import { Exclude, instanceToPlain } from 'class-transformer';
 import { randomUUID } from 'crypto';
+import { PrismaSeatMapper } from 'src/infra/database/prisma/mappers/prisma-seat-mapper';
+import { Flight } from '../flight';
+import { Seat } from '../seat';
+import { Seat as RawSeat } from '@prisma/client';
 
 interface IPassengerProps {
   flightId: string;
@@ -10,6 +14,8 @@ interface IPassengerProps {
   passport: string;
   cpf: string;
   group: string;
+  seat?: Seat;
+  flight?: Flight;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -24,6 +30,10 @@ export class Passenger {
     this.group = props.group;
     this.flightId = props.flightId;
     this.cpf = props.cpf;
+
+    if (props.seat) this.seat = new Seat(props.seat, props.seat.id);
+
+    if (props.flight) this.flight = new Flight(props.flight, props.flight.id);
 
     this.id = id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
@@ -50,6 +60,10 @@ export class Passenger {
 
   group: string;
 
+  seat?: Seat;
+
+  flight?: Flight;
+
   @Exclude()
   createdAt: Date;
 
@@ -57,6 +71,11 @@ export class Passenger {
   updatedAt: Date;
 
   toHTTP(): Passenger {
-    return instanceToPlain(this) as Passenger;
+    const passenger = new Passenger(this, this.id);
+
+    passenger.seat = passenger.seat.toHTTP();
+    passenger.flight = passenger.flight.toHTTP();
+
+    return instanceToPlain(passenger) as Passenger;
   }
 }

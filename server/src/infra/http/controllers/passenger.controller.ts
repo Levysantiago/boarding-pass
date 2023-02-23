@@ -1,10 +1,14 @@
 import { CreatePassengerDTO } from '@app/entities/passenger/create-passenger-dto';
 import CreatePassengerService from '@app/services/passenger/CreatePassengerService';
+import GetBoardingPassInfoService from '@app/services/passenger/GetBoardingPassInfoService';
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 @Controller('passenger')
 export class PassengerController {
-  constructor(private createPassengerService: CreatePassengerService) {}
+  constructor(
+    private createPassengerService: CreatePassengerService,
+    private getBoardingPassInfoService: GetBoardingPassInfoService,
+  ) {}
 
   @Post('/')
   async create(@Body() body: CreatePassengerDTO) {
@@ -18,7 +22,7 @@ export class PassengerController {
       flightId,
       seatCode,
     } = body;
-    await this.createPassengerService.execute({
+    const { data } = await this.createPassengerService.execute({
       firstName,
       lastName,
       birthDate,
@@ -28,5 +32,16 @@ export class PassengerController {
       flightId,
       seatCode,
     });
+
+    return data;
+  }
+
+  @Get('/:passengerId/boardingPass')
+  async getBoardingPass(@Param() params: { passengerId: string }) {
+    const { passengerId } = params;
+    const { data } = await this.getBoardingPassInfoService.execute({
+      passengerId,
+    });
+    return data;
   }
 }

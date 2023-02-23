@@ -23,7 +23,9 @@ export class Seat {
     props.passengerId ? (this.occupied = true) : (this.occupied = false);
     this.code = props.code;
     this.side = props.side;
-    if (this.seatType) new SeatType(props.seatType);
+
+    if (props.seatType)
+      this.seatType = new SeatType(props.seatType, props.seatType.id);
 
     this.id = id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
@@ -56,7 +58,7 @@ export class Seat {
   updatedAt: Date;
 
   toHTTP(): Seat {
-    const seat = new Seat(this);
+    const seat = new Seat(this, this.id);
     if (seat.seatType) seat.seatType = seat.seatType.toHTTP();
     return instanceToPlain(seat) as Seat;
   }

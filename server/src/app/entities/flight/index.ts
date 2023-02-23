@@ -2,6 +2,7 @@ import { Airport } from '@prisma/client';
 import { Exclude, instanceToPlain } from 'class-transformer';
 import { randomUUID } from 'crypto';
 import { orderSeatsByCode } from 'src/helpers/order-seats-by-code';
+import { Route } from '../route';
 import { Seat } from '../seat';
 
 interface IFlightProps {
@@ -15,7 +16,7 @@ interface IFlightProps {
   gate: string;
   createdAt?: Date;
   updatedAt?: Date;
-  route?: { route: string; airportFrom?: Airport; airportTo?: Airport };
+  route?: Route;
   seats?: Seat[];
 }
 
@@ -29,8 +30,8 @@ export class Flight {
     this.flightTime = props.flightTime;
     this.terminal = props.terminal;
     this.gate = props.gate;
-    this.route = props.route;
-    this.seats = orderSeatsByCode(props.seats);
+    this.route = new Route(props.route, props.route.id);
+    if (props.seats) this.seats = orderSeatsByCode(props.seats);
 
     this.id = id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
@@ -56,7 +57,7 @@ export class Flight {
 
   gate: string;
 
-  route?: { route: string; airportFrom?: Airport; airportTo?: Airport };
+  route?: Route;
 
   seats?: Seat[];
 
@@ -67,13 +68,15 @@ export class Flight {
   updatedAt: Date;
 
   toHTTP(): Flight {
-    const flight = new Flight(this);
+    const flight = new Flight(this, this.id);
 
     if (flight.seats) {
       flight.seats = flight.seats.map((seat) => {
         return seat.toHTTP();
       });
     }
+
+    if (flight.route) flight.route = flight.route.toHTTP();
 
     return instanceToPlain(flight) as Flight;
   }

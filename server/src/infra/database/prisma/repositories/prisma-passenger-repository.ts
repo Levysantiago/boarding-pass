@@ -1,5 +1,5 @@
 import { Passenger } from '@app/entities/passenger';
-import { PassengerRepository } from '@app/repositories/passenget-repository';
+import { PassengerRepository } from '@app/repositories/passenger-repository';
 import { Injectable } from '@nestjs/common';
 import { PrismaPassengerMapper } from '../mappers/prisma-passenger-mapper';
 import { PrismaService } from '../prisma.service';
@@ -10,13 +10,25 @@ export class PrismaPassengerRepository implements PassengerRepository {
 
   async create(passenger: Passenger): Promise<void> {
     await this.prismaService.passenger.create({
-      data: passenger,
+      data: PrismaPassengerMapper.toPrisma(passenger),
     });
   }
 
   async findById(passengerId: string): Promise<Passenger | null> {
     const raw = await this.prismaService.passenger.findUnique({
       where: { id: passengerId },
+      include: {
+        flight: {
+          include: {
+            route: true,
+          },
+        },
+        seat: {
+          include: {
+            seatType: true,
+          },
+        },
+      },
     });
 
     return raw ? PrismaPassengerMapper.fromPrisma(raw) : null;

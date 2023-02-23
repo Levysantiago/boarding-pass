@@ -38,7 +38,7 @@ model Seat {
   id          String   @id
   flightId    String
   seatTypeId  String
-  passengerId String?
+  passengerId String?  @unique
   code        String
   side        String //window | middle | corridor
   createdAt   DateTime @default(now())
@@ -77,7 +77,7 @@ model Passenger {
   updatedAt DateTime @default(now())
 
   flight Flight @relation(fields: [flightId], references: [id])
-  seat   Seat[]
+  seat   Seat?
 
   @@map("passengers")
 }

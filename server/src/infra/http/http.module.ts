@@ -3,6 +3,7 @@ import { ListAirportsService } from '@app/services/airport/list-airports-service
 import GetFlightService from '@app/services/flights/get-flight-service';
 import { ListFlightsService } from '@app/services/flights/list-flights-service';
 import CreatePassengerService from '@app/services/passenger/CreatePassengerService';
+import GetBoardingPassInfoService from '@app/services/passenger/GetBoardingPassInfoService';
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from '../database/database.module';
 import { AirportController } from './controllers/airport.controller';
@@ -18,6 +19,7 @@ import { PassengerController } from './controllers/passenger.controller';
     ListFlightsService,
     GetFlightService,
     CreatePassengerService,
+    GetBoardingPassInfoService,
   ],
 })
 export class HttpModule {}

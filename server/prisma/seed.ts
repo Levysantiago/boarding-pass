@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { randomUUID } from 'crypto';
 const prisma = new PrismaClient();
 async function main() {
+  await prisma.passenger.deleteMany();
   await prisma.seat.deleteMany();
   await prisma.seatType.deleteMany();
   await prisma.flight.deleteMany();

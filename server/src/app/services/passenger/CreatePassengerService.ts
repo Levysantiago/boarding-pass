@@ -1,5 +1,5 @@
 import { Passenger } from '@app/entities/passenger';
-import { PassengerRepository } from '@app/repositories/passenget-repository';
+import { PassengerRepository } from '@app/repositories/passenger-repository';
 import { SeatRepository } from '@app/repositories/seat-repository';
 import { Injectable } from '@nestjs/common';
 
@@ -14,7 +14,9 @@ interface IRequest {
   seatCode: string;
   flightId: string;
 }
-interface IResponse {}
+interface IResponse {
+  data: Passenger;
+}
 
 @Injectable()
 export default class CreatePassengerService {
@@ -32,7 +34,7 @@ export default class CreatePassengerService {
     cpf,
     flightId,
     seatCode,
-  }: IRequest): Promise<void> {
+  }: IRequest): Promise<IResponse> {
     const seats = await this.seatRepository.findAll({
       flightId,
       code: seatCode,
@@ -60,5 +62,7 @@ export default class CreatePassengerService {
     await this.passengerRepository.create(passenger);
     // Updating the seat
     await this.seatRepository.save(seat);
+
+    return { data: passenger };
   }
 }

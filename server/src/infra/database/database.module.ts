@@ -1,6 +1,6 @@
 import { AirportRepository } from '@app/repositories/airport-repository';
 import { FlightRepository } from '@app/repositories/flight-repository';
-import { PassengerRepository } from '@app/repositories/passenget-repository';
+import { PassengerRepository } from '@app/repositories/passenger-repository';
 import { SeatRepository } from '@app/repositories/seat-repository';
 import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
