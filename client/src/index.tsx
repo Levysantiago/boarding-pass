@@ -3,15 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Home from "./pages/Home";
 import reportWebVitals from "./reportWebVitals";
+import { MyRoutes } from "./routes";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(
-  <React.StrictMode>
-    <Home />
-  </React.StrictMode>
-);
+root.render(MyRoutes);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
