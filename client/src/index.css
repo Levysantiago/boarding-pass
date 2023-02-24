@@ -1,0 +1,10 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  height: 100%;
+  background: linear-gradient(to bottom, #8257e5 0%, #271a45 100%) fixed;
+  background-color: #30176b;
+}
