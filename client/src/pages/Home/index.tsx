@@ -1,5 +1,11 @@
 import { Dropdown } from "../../components/Dropdown";
-import { Container, DropdownContainer, HeaderContainer } from "./styles";
+import { Route } from "../../components/Route";
+import {
+  Container,
+  DropdownContainer,
+  HeaderContainer,
+  RoutesContainer,
+} from "./styles";
 
 function Home() {
   return (
@@ -17,6 +23,10 @@ function Home() {
           <Dropdown id={3} />
         </DropdownContainer>
       </HeaderContainer>
+
+      <RoutesContainer>
+        <Route />
+      </RoutesContainer>
     </Container>
   );
 }

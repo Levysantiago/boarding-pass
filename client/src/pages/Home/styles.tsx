@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 100px 200px;
+  padding: 100px 100px;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export const DropdownContainer = styled.div`
@@ -12,4 +13,8 @@ export const DropdownContainer = styled.div`
 
 export const HeaderContainer = styled.div`
   display: flex;
+`;
+
+export const RoutesContainer = styled.div`
+  width: 100%;
 `;
