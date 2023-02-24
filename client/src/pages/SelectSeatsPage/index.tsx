@@ -4,6 +4,7 @@ import {
   AircraftColumn,
   AircraftContainer,
   AircraftContent,
+  ButtonsContainer,
   Container,
   Divider,
   Letter,
@@ -14,6 +15,7 @@ import {
   SeatsContainer,
 } from "./styles";
 import seatFreeIcon from "../../assets/seat-free.svg";
+import { Button } from "../../components/Button";
 
 export function SelectSeatsPage() {
   return (
@@ -28,8 +30,8 @@ export function SelectSeatsPage() {
             <AircraftColumn>
               <LettersLine>
                 <Letter>A</Letter>
-                <Letter>A</Letter>
-                <Letter>A</Letter>
+                <Letter>B</Letter>
+                <Letter>C</Letter>
               </LettersLine>
 
               <SeatsContainer>
@@ -64,20 +66,20 @@ export function SelectSeatsPage() {
               <NumbersColumn>
                 <NumberColumnItem>1</NumberColumnItem>
                 <NumberColumnItem>2</NumberColumnItem>
-                <NumberColumnItem>2</NumberColumnItem>
-                <NumberColumnItem>2</NumberColumnItem>
-                <NumberColumnItem>2</NumberColumnItem>
-                <NumberColumnItem>2</NumberColumnItem>
-                <NumberColumnItem>2</NumberColumnItem>
-                <NumberColumnItem>2</NumberColumnItem>
+                <NumberColumnItem>3</NumberColumnItem>
+                <NumberColumnItem>4</NumberColumnItem>
+                <NumberColumnItem>5</NumberColumnItem>
+                <NumberColumnItem>6</NumberColumnItem>
+                <NumberColumnItem>7</NumberColumnItem>
+                <NumberColumnItem>8</NumberColumnItem>
               </NumbersColumn>
             </AircraftColumn>
 
             <AircraftColumn>
               <LettersLine>
-                <Letter>A</Letter>
-                <Letter>A</Letter>
-                <Letter>A</Letter>
+                <Letter>D</Letter>
+                <Letter>E</Letter>
+                <Letter>F</Letter>
               </LettersLine>
 
               <SeatsContainer>
@@ -108,6 +110,11 @@ export function SelectSeatsPage() {
               </SeatsContainer>
             </AircraftColumn>
           </AircraftBody>
+
+          <ButtonsContainer>
+            <Button isBack title="Voltar" />
+            <Button title="Continuar" />
+          </ButtonsContainer>
         </AircraftContent>
       </AircraftContainer>
     </Container>

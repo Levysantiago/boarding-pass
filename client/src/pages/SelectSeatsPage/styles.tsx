@@ -7,7 +7,6 @@ export const Container = styled.div`
 
 export const AircraftContainer = styled.div`
   width: 400px;
-  height: 600px;
   margin-top: 40px;
   background: #1e0063;
   border-radius: 200px 200px 36px 36px;
@@ -79,4 +78,10 @@ export const SeatsContainer = styled.div`
 export const SeatIcon = styled.img`
   width: 25px;
   cursor: pointer;
+`;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  margin: 10px 0px 20px 0px;
 `;
