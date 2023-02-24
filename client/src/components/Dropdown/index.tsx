@@ -32,21 +32,21 @@ export function Dropdown({ id }: IProps) {
       <DropdownButton onClick={onDropdownClick}>
         <DropdownText>São Paulo, GRU - Brasil</DropdownText>
         <ArrowDownIcon />
+        <DropdownList id={`dropdown-list-${id}`}>
+          <ListItem selected>
+            <ListItemText>São Paulo, GRU - Brasil</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText>São Paulo, GRU - Brasil</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText>São Paulo, GRU - Brasil</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText>São Paulo, GRU - Brasil</ListItemText>
+          </ListItem>
+        </DropdownList>
       </DropdownButton>
-      <DropdownList id={`dropdown-list-${id}`}>
-        <ListItem selected>
-          <ListItemText>São Paulo, GRU - Brasil</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemText>São Paulo, GRU - Brasil</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemText>São Paulo, GRU - Brasil</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemText>São Paulo, GRU - Brasil</ListItemText>
-        </ListItem>
-      </DropdownList>
     </Container>
   );
 }
