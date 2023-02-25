@@ -13,7 +13,7 @@ export const Label = styled.span`
   color: #e4e0ec;
 `;
 
-export const DropdownButton = styled.button`
+export const DropdownButton = styled.button.attrs({ type: "button" })`
   height: 40px;
   background-color: #1e0063;
   border-radius: 5px;
@@ -24,7 +24,6 @@ export const DropdownButton = styled.button`
   margin-top: 5px;
   padding: 10px;
   border: none;
-  position: relative;
 `;
 
 export const DropdownText = styled.span`

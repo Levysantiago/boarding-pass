@@ -14,15 +14,15 @@ function Home() {
       <Container>
         <HeaderContainer>
           <DropdownContainer>
-            <Dropdown id={1} />
+            <Dropdown id="home-1" />
           </DropdownContainer>
 
           <DropdownContainer>
-            <Dropdown id={2} />
+            <Dropdown id="home-2" />
           </DropdownContainer>
 
           <DropdownContainer>
-            <Dropdown id={3} />
+            <Dropdown id="home-3" />
           </DropdownContainer>
         </HeaderContainer>
 

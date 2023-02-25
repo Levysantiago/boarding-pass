@@ -10,7 +10,7 @@ import {
 } from "./styles";
 
 interface IProps {
-  id: number;
+  id: string;
 }
 
 export function Dropdown({ id }: IProps) {
