@@ -1,39 +1,20 @@
 import { Button } from "../../components/Button";
 import { Dropdown } from "../../components/Dropdown";
+import { FlightSummary } from "../../components/FlightSummary";
 import { Input } from "../../components/Input";
 import {
   ButtonsContainer,
   Container,
-  FinalPriceContainer,
-  FinalPriceLabel,
-  FinalPriceValue,
-  FlightSummary,
-  FlightSummaryContainer,
   InputContainer,
   PassengerInfo,
   PassengerInfoContainer,
-  SummaryText,
   Title,
 } from "./styles";
 
 export function PassengerPage() {
   return (
     <Container>
-      <FlightSummaryContainer>
-        <Title>Resumo de voo</Title>
-        <FlightSummary>
-          <SummaryText>{"17:00 GRU -> 18:30 SFO"}</SummaryText>
-          <SummaryText>{"Duração 1 h 30 min"}</SummaryText>
-          <SummaryText>{"Voo Direto"}</SummaryText>
-          <SummaryText>{"Assento 10A"}</SummaryText>
-
-          <FinalPriceContainer>
-            <FinalPriceLabel>Preço final</FinalPriceLabel>
-            <FinalPriceValue>R$ 255,00</FinalPriceValue>
-          </FinalPriceContainer>
-        </FlightSummary>
-      </FlightSummaryContainer>
-
+      <FlightSummary />
       <PassengerInfoContainer>
         <Title>Passageiro</Title>
       </PassengerInfoContainer>
