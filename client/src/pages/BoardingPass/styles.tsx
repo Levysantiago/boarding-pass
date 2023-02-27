@@ -12,6 +12,14 @@ export const Container = styled.div`
   filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.25));
 `;
 
+export const HeaderTitle = styled.span`
+  font-size: 20px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 20px;
+`;
+
 export const FlightContainer = styled.div`
   background-color: #ffffff;
   padding: 30px;
@@ -29,11 +37,11 @@ export const FlightContainer = styled.div`
 
 export const PassengerInfoContainer = styled.div`
   background-color: #ffffff;
-  padding: 30px;
+  padding: 20px 30px;
   width: 300px;
   position: relative;
 
-  --mask: radial-gradient(15px at 180px, transparent 95%, black) -180px 57px;
+  --mask: radial-gradient(15px at 180px, transparent 95%, black) -180px 37px;
   -webkit-mask: var(--mask);
   mask: var(--mask);
 `;
@@ -45,10 +53,10 @@ export const TopicsLine = styled.div`
 
 export const TopicContainer = styled.div(
   (props: { left?: boolean }) => `
-  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  align-items: ${props.left ? "flex-start" : "flex-end"}
+  align-items: ${props.left ? "flex-start" : "flex-end"};
+  justify-items: center;
 `
 );
 
@@ -110,7 +118,6 @@ export const BoardingInfoContainer = styled.div`
   padding: 30px;
   width: 300px;
   border-radius: 0px 0px 20px 20px;
-  margin-top: -1px;
 
   --mask: radial-gradient(15px at top, transparent 95%, black) -180px;
   -webkit-mask: var(--mask);
@@ -179,6 +186,13 @@ export const Ball1 = styled.div`
   top: 183px;
   left: 0px;
 `;
-export const Ball2 = styled.div``;
-export const Ball3 = styled.div``;
-export const Ball4 = styled.div``;
+
+export const IssueText = styled.span`
+  font-size: 14px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  margin-top: 20px;
+  width: 300px;
+  text-align: center;
+`;

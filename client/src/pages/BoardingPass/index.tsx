@@ -11,6 +11,8 @@ import {
   FinalMessageDescription,
   FinalMessageTitle,
   FlightContainer,
+  HeaderTitle,
+  IssueText,
   LargeTopicDescription,
   LineItems,
   PassengerInfoContainer,
@@ -26,17 +28,18 @@ import {
 export function BoardingPass() {
   return (
     <Container>
+      <HeaderTitle>Cartão de embarque</HeaderTitle>
       <FlightContainer>
         {/* FLIGHT */}
-        <TopicsLine>
+        <TopicsLine style={{ marginBottom: "20px" }}>
           <TopicContainer left>
             <TopicTitle>Voo</TopicTitle>
             <TopicDescription>RS995</TopicDescription>
           </TopicContainer>
 
           <TopicContainer>
-            <TopicTitle>Voo</TopicTitle>
-            <TopicDescription>RS995</TopicDescription>
+            <TopicTitle>Data</TopicTitle>
+            <TopicDescription>23/05/2023</TopicDescription>
           </TopicContainer>
         </TopicsLine>
 
@@ -109,6 +112,10 @@ export function BoardingPass() {
           <FinalMessageDescription>Portão fecha 16:45</FinalMessageDescription>
         </FinalMessageContainer>
       </BoardingInfoContainer>
+
+      <IssueText>
+        Qualquer problema procure o balcão de atendimento da sua companhia aérea
+      </IssueText>
     </Container>
   );
 }
