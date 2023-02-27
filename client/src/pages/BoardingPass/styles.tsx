@@ -7,18 +7,35 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 100px;
+  padding-bottom: 100px;
+  gap: 0px;
+  filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.25));
 `;
 
-export const BoardingPassContainer = styled.div`
+export const FlightContainer = styled.div`
   background-color: #ffffff;
   padding: 30px;
-  border-radius: 20px;
+  border-radius: 20px 20px 0px 0px;
   width: 300px;
   position: relative;
+  margin-bottom: -1px;
+
+  --mask: radial-gradient(15px at bottom, transparent 95%, black) -180px;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
 `;
 
 export const PassengerInfoContainer = styled.div`
-  margin-top: 20px;
+  background-color: #ffffff;
+  padding: 30px;
+  width: 300px;
+  position: relative;
+
+  --mask: radial-gradient(15px at 180px, transparent 95%, black) -180px 57px;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
 `;
 
 export const TopicsLine = styled.div`
@@ -88,13 +105,28 @@ export const BadgeTitle = styled.span`
 
 export const BoardingInfoContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 30px;
+  width: 300px;
+  border-radius: 0px 0px 20px 20px;
+  margin-top: -1px;
+
+  --mask: radial-gradient(15px at top, transparent 95%, black) -180px;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
 `;
 
 export const ColumnItems = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const LineItems = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const QrCode = styled.img.attrs({

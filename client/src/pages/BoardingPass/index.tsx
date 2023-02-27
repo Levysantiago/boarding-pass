@@ -4,14 +4,15 @@ import {
   BadgeTitle,
   Ball1,
   BoardingInfoContainer,
-  BoardingPassContainer,
   ColumnItems,
   Container,
   DashedDivider,
   FinalMessageContainer,
   FinalMessageDescription,
   FinalMessageTitle,
+  FlightContainer,
   LargeTopicDescription,
+  LineItems,
   PassengerInfoContainer,
   QrCode,
   QrCodeDescription,
@@ -25,7 +26,7 @@ import {
 export function BoardingPass() {
   return (
     <Container>
-      <BoardingPassContainer>
+      <FlightContainer>
         {/* FLIGHT */}
         <TopicsLine>
           <TopicContainer left>
@@ -54,28 +55,30 @@ export function BoardingPass() {
             <TopicRegularDescription>18:30</TopicRegularDescription>
           </TopicContainer>
         </TopicsLine>
+      </FlightContainer>
 
-        <DashedDivider />
+      {/* PASSENGER */}
+      <PassengerInfoContainer>
+        <DashedDivider style={{ top: "0px" }} />
 
-        {/* PASSENGER */}
-        <PassengerInfoContainer>
-          <TopicsLine>
-            <TopicContainer left>
-              <TopicTitle>Passageiro</TopicTitle>
-              <TopicDescription>Carlos</TopicDescription>
-            </TopicContainer>
+        <TopicsLine>
+          <TopicContainer left>
+            <TopicTitle>Passageiro</TopicTitle>
+            <TopicDescription>Carlos</TopicDescription>
+          </TopicContainer>
 
-            <TopicContainer>
-              <TopicTitle>Assento</TopicTitle>
-              <TopicDescription>10A</TopicDescription>
-            </TopicContainer>
-          </TopicsLine>
-        </PassengerInfoContainer>
+          <TopicContainer>
+            <TopicTitle>Assento</TopicTitle>
+            <TopicDescription>10A</TopicDescription>
+          </TopicContainer>
+        </TopicsLine>
 
-        <DashedDivider />
+        <DashedDivider style={{ bottom: "0px" }} />
+      </PassengerInfoContainer>
 
-        {/* BOARDING */}
-        <BoardingInfoContainer>
+      {/* BOARDING */}
+      <BoardingInfoContainer>
+        <LineItems>
           <ColumnItems>
             <TopicContainer left>
               <TopicTitle>Embarque</TopicTitle>
@@ -99,15 +102,13 @@ export function BoardingPass() {
             <QrCode />
             <QrCodeDescription>Grupo de embarque: 3</QrCodeDescription>
           </ColumnItems>
-        </BoardingInfoContainer>
+        </LineItems>
 
         <FinalMessageContainer>
           <FinalMessageTitle>{`Atenção: `}</FinalMessageTitle>
           <FinalMessageDescription>Portão fecha 16:45</FinalMessageDescription>
         </FinalMessageContainer>
-
-        <Ball1 />
-      </BoardingPassContainer>
+      </BoardingInfoContainer>
     </Container>
   );
 }
