@@ -17,6 +17,8 @@ export const Container = styled.div`
 export const DropdownContainer = styled.div`
   margin: 0px 10px 50px 10px;
   width: 200px;
+  display: flex;
+  align-items: flex-end;
 
   @media (max-width: 800px) {
     width: 300px;

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { IAirport } from "../../entities/IAirport";
 import {
   ArrowDownIcon,
   Container,
@@ -9,11 +11,26 @@ import {
   ListItemText,
 } from "./styles";
 
-interface IProps {
+export interface IDropdownItem {
   id: string;
+  value: string;
 }
 
-export function Dropdown({ id }: IProps) {
+interface IProps {
+  id: string;
+  label: string;
+  list: IDropdownItem[];
+  selectedIndex: number;
+  setSelectedIndex: (selected: number) => void;
+}
+
+export function Dropdown({
+  id,
+  list,
+  label,
+  selectedIndex,
+  setSelectedIndex,
+}: IProps) {
   function onDropdownClick() {
     const dropdownList = document.getElementById(`dropdown-list-${id}`);
 
@@ -28,23 +45,24 @@ export function Dropdown({ id }: IProps) {
 
   return (
     <Container>
-      <Label>Origem</Label>
+      <Label>{label}</Label>
       <DropdownButton onClick={onDropdownClick}>
-        <DropdownText>São Paulo, GRU - Brasil</DropdownText>
+        <DropdownText>{list[selectedIndex]?.value || ""}</DropdownText>
         <ArrowDownIcon />
         <DropdownList id={`dropdown-list-${id}`}>
-          <ListItem selected>
-            <ListItemText>São Paulo, GRU - Brasil</ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>São Paulo, GRU - Brasil</ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>São Paulo, GRU - Brasil</ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>São Paulo, GRU - Brasil</ListItemText>
-          </ListItem>
+          {list.map((item, index) => {
+            return (
+              <ListItem
+                key={`${id}-${index}`}
+                selected={index === selectedIndex}
+                onClick={() => {
+                  setSelectedIndex(index);
+                }}
+              >
+                <ListItemText>{item.value}</ListItemText>
+              </ListItem>
+            );
+          })}
         </DropdownList>
       </DropdownButton>
     </Container>

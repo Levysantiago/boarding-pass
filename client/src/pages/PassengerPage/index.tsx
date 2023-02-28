@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "../../components/Button";
 import { Dropdown } from "../../components/Dropdown";
 import { FlightSummary } from "../../components/FlightSummary";
@@ -12,6 +13,8 @@ import {
 } from "./styles";
 
 export function PassengerPage() {
+  const [selectedGender, setSelectedGender] = useState(0);
+
   return (
     <Container>
       <FlightSummary />
@@ -33,7 +36,17 @@ export function PassengerPage() {
         </InputContainer>
 
         <InputContainer>
-          <Dropdown id="passenger-1" />
+          <Dropdown
+            list={[
+              { id: "0", value: "Masculino" },
+              { id: "1", value: "Feminino" },
+              { id: "2", value: "Outro" },
+            ]}
+            label="Sexo"
+            id="passenger-1"
+            selectedIndex={selectedGender}
+            setSelectedIndex={setSelectedGender}
+          />
         </InputContainer>
 
         <InputContainer>
