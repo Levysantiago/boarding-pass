@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Dropdown, IDropdownItem } from "../../components/Dropdown";
-import { Route } from "../../components/Route";
+import { FlightRoute } from "../../components/FlightRoute";
 import { getAirportsService } from "../../services/getAirportsService";
 import { IAirport } from "../../entities/IAirport";
 import {
@@ -11,14 +11,21 @@ import {
   RoutesContainer,
 } from "./styles";
 import { Button } from "../../components/Button";
+import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
+import { getFlightsService } from "../../services/getFlightsService";
+import { IFlight } from "../../entities/IFlight";
 
 function Home() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [selectedOrigin, setSelectedOrigin] = useState(0);
   const [selectedDestination, setSelectedDestination] = useState(0);
   const [airports, setAirports] = useState<IAirport[]>([]);
   const [airportsDropdownSelection, setAirportsDropdownSelection] = useState<
     IDropdownItem[]
   >([]);
+  const [flights, setFlights] = useState<IFlight[]>([]);
 
   async function fetchAirportsData() {
     try {
@@ -41,8 +48,25 @@ function Home() {
     setAirportsDropdownSelection(_airportsDropdownSelection);
   }
 
+  async function fetchFlights() {
+    try {
+      const params = new URLSearchParams(location.search);
+
+      const flights = await getFlightsService({
+        airportFromId: params.get("from"),
+        airportToId: params.get("to"),
+      });
+
+      setFlights(flights);
+    } catch (e) {
+      alert("Error while obtaining flights data.");
+    }
+  }
   useEffect(() => {
     fetchAirportsData();
+  }, []);
+
+  useEffect(() => {
     configureAirportsDropdownSelection();
   }, [airports]);
 
@@ -74,8 +98,14 @@ function Home() {
             <Button
               title="Buscar"
               onClick={() => {
-                console.log(airports[selectedOrigin]);
-                console.log(airports[selectedDestination]);
+                navigate({
+                  pathname: "/",
+                  search: `${createSearchParams({
+                    from: airports[selectedOrigin].id,
+                    to: airports[selectedDestination].id,
+                  })}`,
+                });
+                fetchFlights();
               }}
             ></Button>
           </DropdownContainer>
@@ -85,8 +115,9 @@ function Home() {
         </HeaderContainer>
 
         <RoutesContainer>
-          <Route />
-          <Route />
+          {flights.map((flight, index) => {
+            return <FlightRoute key={`home-flight-${index}`} flight={flight} />;
+          })}
         </RoutesContainer>
       </Container>
     </OutsideContainer>

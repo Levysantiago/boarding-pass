@@ -1,3 +1,5 @@
+import moment from "moment";
+import { IFlight } from "../../entities/IFlight";
 import {
   AircraftCodeText,
   AircraftIcon,
@@ -12,13 +14,17 @@ import {
   TopicTitle,
 } from "./styles";
 
-export function Route() {
+interface IProps {
+  flight: IFlight;
+}
+
+export function FlightRoute({ flight }: IProps) {
   return (
     <Container>
       <TitleContainer>
-        <Title>17:00 GRU</Title>
+        <Title>{`${flight.flightTime} ${flight.route.airportFrom.city}`}</Title>
         <AircraftIcon />
-        <Title>17:00 SFO</Title>
+        <Title>{`17:00 ${flight.route.airportTo.city}`}</Title>
       </TitleContainer>
 
       <BlockContainer>
@@ -30,7 +36,7 @@ export function Route() {
 
           <TopicContainer>
             <TopicTitle>Duração</TopicTitle>
-            <TopicText>1 h 30 min</TopicText>
+            <TopicText>{`${flight.route.duration}`}</TopicText>
           </TopicContainer>
 
           <TopicContainer>
@@ -40,7 +46,7 @@ export function Route() {
         </TopicsContainer>
       </BlockContainer>
 
-      <AircraftCodeText>RS995</AircraftCodeText>
+      <AircraftCodeText>{flight.aircraftCode}</AircraftCodeText>
     </Container>
   );
 }
