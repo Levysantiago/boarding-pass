@@ -17,11 +17,12 @@ import {
 interface IProps {
   route: IRoute;
   flight: IFlight;
+  onClick?: () => void;
 }
 
-export function FlightRoute({ route, flight }: IProps) {
+export function FlightRoute({ route, flight, onClick }: IProps) {
   return (
-    <Container>
+    <Container onClick={onClick}>
       <TitleContainer>
         <Title>{`${flight.flightTime} ${route.airportFrom.city}`}</Title>
         <AircraftIcon />

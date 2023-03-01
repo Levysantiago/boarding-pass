@@ -133,6 +133,14 @@ function Home() {
                     route={route}
                     flight={flight}
                     key={`home-flight-${index}`}
+                    onClick={() => {
+                      navigate({
+                        pathname: "/select-seats",
+                        search: `${createSearchParams({
+                          flightId: flight.id,
+                        })}`,
+                      });
+                    }}
                   />
                 );
               })

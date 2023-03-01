@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import aircraftIcon from "../../assets/aircraft.svg";
 
-export const Container = styled.div`
+export const Container = styled.button.attrs({ type: "button" })`
   display: flex;
   flex-direction: column;
   background-color: #1e0063;
@@ -9,6 +9,15 @@ export const Container = styled.div`
   border-radius: 8px;
   position: relative;
   margin-bottom: 10px;
+  cursor: pointer;
+  border: none;
+  text-align: start;
+  align-items: center;
+  width: 100%;
+
+  &:hover {
+    box-shadow: 4px 4px 15px rgba(30, 0, 99, 0.25);
+  }
 `;
 
 export const TitleContainer = styled.div`
