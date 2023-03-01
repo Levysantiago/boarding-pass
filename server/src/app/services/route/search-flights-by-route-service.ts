@@ -38,13 +38,22 @@ export class SearchFlightsByRouteService {
       airportFrom = await this.airportRepository.findById(airportFromId);
       airportTo = await this.airportRepository.findById(airportToId);
     }
+    if (!airportFrom || !airportTo) {
+      throw new HttpException('Invalid route selected', HttpStatus.BAD_REQUEST);
+    }
 
     const route = await this.routeRepository.findByAirports({
       airportFromId,
       airportToId,
     });
-    if (!route || (!airportFrom && !airportTo))
-      throw new HttpException('Route not found', HttpStatus.NOT_FOUND);
+    if (!route) {
+      return {
+        data: {
+          route: null,
+          flights: [],
+        },
+      };
+    }
 
     route.airportFrom = airportFrom.toHTTP();
     route.airportTo = airportTo.toHTTP();
