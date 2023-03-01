@@ -64,8 +64,8 @@ async function main() {
   await prisma.route.create({
     data: {
       id: route_IOS_GRU_id,
-      airportIdFrom: airport_IOS_id,
-      airportIdTo: airport_GRU_id,
+      airportFromId: airport_IOS_id,
+      airportToId: airport_GRU_id,
       duration: '1h',
     },
   });
@@ -78,10 +78,11 @@ async function main() {
       routeId: route_IOS_GRU_id,
       terminal: '1',
       gate: '1',
-      finishBookingTime: new Date('10/13/23'),
-      boardingEndingTime: new Date('10/13/23'),
-      boardingTime: new Date('04/13/23'),
-      flightTime: new Date('04/13/23'),
+      finishBookingTime: new Date('2023-02-28T13:34:22.107Z'),
+      boardingEndingTime: new Date('2023-03-01T13:20:22.107Z'),
+      boardingTime: new Date('2023-03-01T12:34:22.107Z'),
+      flightTime: new Date('2023-03-01T13:34:22.107Z'),
+      arrivalTime: new Date('2023-03-01T14:34:22.107Z'),
       aircraftCode: 'RS995',
     },
   });

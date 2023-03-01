@@ -1,19 +1,15 @@
 import GetFlightService from '@app/services/flights/get-flight-service';
-import { ListFlightsService } from '@app/services/flights/list-flights-service';
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 
 @Controller('flight')
 export class FlightController {
-  constructor(
-    private listFlightsService: ListFlightsService,
-    private getFlightService: GetFlightService,
-  ) {}
+  constructor(private getFlightService: GetFlightService) {}
 
-  @Get('/')
-  async list(@Query() query: { airportFromId?: string; airportToId?: string }) {
-    const { data } = await this.listFlightsService.execute(query);
-    return data;
-  }
+  // @Get('/')
+  // async list(@Query() query: { airportFromId?: string; airportToId?: string }) {
+  //   const { data } = await this.listFlightsService.execute(query);
+  //   return data;
+  // }
 
   @Get('/:flightId')
   async getById(@Param() param: { flightId: string }) {

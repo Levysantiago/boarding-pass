@@ -12,6 +12,7 @@ interface IFlightProps {
   boardingTime: Date;
   boardingEndingTime: Date;
   flightTime: Date;
+  arrivalTime: Date;
   terminal: string;
   gate: string;
   createdAt?: Date;
@@ -28,10 +29,18 @@ export class Flight {
     this.boardingTime = props.boardingTime;
     this.boardingEndingTime = props.boardingEndingTime;
     this.flightTime = props.flightTime;
+    this.arrivalTime = props.arrivalTime;
     this.terminal = props.terminal;
     this.gate = props.gate;
-    this.route = new Route(props.route, props.route.id);
-    if (props.seats) this.seats = orderSeatsByCode(props.seats);
+    if (props.route) {
+      this.route = new Route(props.route, props.route.id);
+    }
+    if (props.seats) {
+      this.seats = orderSeatsByCode(props.seats);
+      this.seats = props.seats.map((seat) => {
+        return new Seat(seat, seat.id);
+      });
+    }
 
     this.id = id ?? randomUUID();
     this.createdAt = props.createdAt ?? new Date();
@@ -52,6 +61,8 @@ export class Flight {
   boardingEndingTime: Date;
 
   flightTime: Date;
+
+  arrivalTime: Date;
 
   terminal: string;
 

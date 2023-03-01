@@ -84,10 +84,10 @@ model Passenger {
 
 model Route {
   id            String   @id
-  airportIdFrom String   @unique
-  airportIdTo   String   @unique
+  airportFromId String   @unique
+  airportToId   String   @unique
   duration      String
-  Flight        Flight[]
+  flights       Flight[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now())
 
@@ -102,6 +102,7 @@ model Flight {
   boardingTime       DateTime
   boardingEndingTime DateTime
   flightTime         DateTime
+  arrivalTime        DateTime
   terminal           String
   gate               String
   seats              Seat[]

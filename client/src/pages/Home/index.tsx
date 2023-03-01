@@ -14,6 +14,8 @@ import { Button } from "../../components/Button";
 import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { getFlightsService } from "../../services/getFlightsService";
 import { IFlight } from "../../entities/IFlight";
+import { IServerError } from "../../error/IServerError";
+import { IRoute } from "../../entities/IRoute";
 
 function Home() {
   const navigate = useNavigate();
@@ -26,10 +28,12 @@ function Home() {
     IDropdownItem[]
   >([]);
   const [flights, setFlights] = useState<IFlight[]>([]);
+  const [route, setRoute] = useState<IRoute>();
 
   async function fetchAirportsData() {
     try {
       const airportsData = await getAirportsService();
+
       setAirports(airportsData);
     } catch (e) {
       alert("Error while obtaining airports data.");
@@ -52,14 +56,16 @@ function Home() {
     try {
       const params = new URLSearchParams(location.search);
 
-      const flights = await getFlightsService({
+      const data = await getFlightsService({
         airportFromId: params.get("from"),
         airportToId: params.get("to"),
       });
 
-      setFlights(flights);
-    } catch (e) {
-      alert("Error while obtaining flights data.");
+      setFlights(data.flights);
+      setRoute(data.route);
+    } catch (e: any) {
+      const data: IServerError = JSON.parse(e.message);
+      alert(data.message);
     }
   }
   useEffect(() => {
@@ -69,6 +75,12 @@ function Home() {
   useEffect(() => {
     configureAirportsDropdownSelection();
   }, [airports]);
+
+  useEffect(() => {
+    if (location.search) {
+      fetchFlights();
+    }
+  }, [location.search]);
 
   return (
     <OutsideContainer>
@@ -105,7 +117,6 @@ function Home() {
                     to: airports[selectedDestination].id,
                   })}`,
                 });
-                fetchFlights();
               }}
             ></Button>
           </DropdownContainer>
@@ -115,9 +126,17 @@ function Home() {
         </HeaderContainer>
 
         <RoutesContainer>
-          {flights.map((flight, index) => {
-            return <FlightRoute key={`home-flight-${index}`} flight={flight} />;
-          })}
+          {route
+            ? flights.map((flight, index) => {
+                return (
+                  <FlightRoute
+                    route={route}
+                    flight={flight}
+                    key={`home-flight-${index}`}
+                  />
+                );
+              })
+            : null}
         </RoutesContainer>
       </Container>
     </OutsideContainer>

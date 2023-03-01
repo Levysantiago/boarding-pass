@@ -23,10 +23,10 @@ export default class GetBoardingPassInfoService {
     if (!passenger) throw new Error('Passenger not found');
 
     const airportFrom = await this.airportRepository.findById(
-      passenger.flight.route.airportIdFrom,
+      passenger.flight.route.airportFromId,
     );
     const airportTo = await this.airportRepository.findById(
-      passenger.flight.route.airportIdTo,
+      passenger.flight.route.airportToId,
     );
 
     passenger.flight.route.airportFrom = airportFrom;

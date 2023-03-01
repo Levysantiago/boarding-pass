@@ -2,10 +2,10 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateRouteDTO {
   @IsNotEmpty()
-  airportIdFrom: string;
+  airportFromId: string;
 
   @IsNotEmpty()
-  airportIdTo: string;
+  airportToId: string;
 
   @IsNotEmpty()
   duration: string;
