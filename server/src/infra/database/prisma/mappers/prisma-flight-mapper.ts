@@ -9,9 +9,7 @@ export class PrismaFlightMapper {
   }
 
   static fromPrisma(rawFlight: RawFlight): Flight {
-    console.log(rawFlight);
     const flight = new Flight(rawFlight, rawFlight.id);
-    console.log(flight);
 
     // Configuring seats
     if (flight.seats) {

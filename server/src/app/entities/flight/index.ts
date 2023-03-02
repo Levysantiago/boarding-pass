@@ -1,7 +1,6 @@
-import { Airport } from '@prisma/client';
 import { Exclude, instanceToPlain } from 'class-transformer';
 import { randomUUID } from 'crypto';
-import { orderSeatsByCode } from 'src/helpers/order-seats-by-code';
+import { orderSeatsByNumber } from 'src/helpers/order-seats-by-number';
 import { Route } from '../route';
 import { Seat } from '../seat';
 
@@ -36,7 +35,7 @@ export class Flight {
       this.route = new Route(props.route, props.route.id);
     }
     if (props.seats) {
-      this.seats = orderSeatsByCode(props.seats);
+      this.seats = orderSeatsByNumber(props.seats);
       this.seats = props.seats.map((seat) => {
         return new Seat(seat, seat.id);
       });

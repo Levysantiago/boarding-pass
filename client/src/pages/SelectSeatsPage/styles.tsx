@@ -1,4 +1,8 @@
+import React from "react";
 import styled from "styled-components";
+import seatSelectedIcon from "../../assets/seat-selected.svg";
+import seatHoveredIcon from "../../assets/seat-hovered.svg";
+import seatFreeIcon from "../../assets/seat-free.svg";
 
 export const Container = styled.div`
   display: flex;
@@ -8,6 +12,8 @@ export const Container = styled.div`
 export const AircraftContainer = styled.div`
   width: 400px;
   margin-top: 40px;
+  padding-bottom: 30px;
+  margin-bottom: 100px;
   background: #1e0063;
   border-radius: 200px 200px 36px 36px;
 `;
@@ -54,6 +60,7 @@ export const NumberColumnItem = styled.span`
   font-family: "Rubik", sans-serif;
   font-weight: 400;
   color: #bea3ff;
+  margin-top: 2px;
 `;
 
 export const LettersLine = styled.div`
@@ -75,13 +82,35 @@ export const SeatsContainer = styled.div`
   grid-template-columns: auto auto auto;
 `;
 
-export const SeatIcon = styled.img`
+export const SeatButton = styled.button.attrs({ type: "button" })`
+  border: none;
+  background-color: transparent;
+`;
+
+export const SeatIcon = styled.img.attrs((props: { isSelected: boolean }) => ({
+  src: props.isSelected ? seatSelectedIcon : seatFreeIcon,
+
+  onMouseEnter: (event: React.MouseEvent) => {
+    const element: HTMLImageElement = event.target as HTMLImageElement;
+
+    if (!props.isSelected) {
+      element.src = seatHoveredIcon;
+    }
+  },
+  onMouseLeave: (event: React.MouseEvent) => {
+    const element: HTMLImageElement = event.target as HTMLImageElement;
+    if (!props.isSelected) {
+      element.src = seatFreeIcon;
+    }
+  },
+}))(
+  (props: { isSelected: boolean }) => `
   width: 25px;
   cursor: pointer;
-`;
+`
+);
 
 export const ButtonsContainer = styled.div`
   display: flex;
   gap: 10px;
-  margin: 10px 0px 20px 0px;
 `;

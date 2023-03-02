@@ -20,7 +20,7 @@ export class PrismaFlightRepository implements FlightRepository {
       },
     });
 
-    return PrismaFlightMapper.fromPrisma(raw);
+    return raw ? PrismaFlightMapper.fromPrisma(raw) : null;
   }
 
   async save(flight: Flight): Promise<void> {

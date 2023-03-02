@@ -3,7 +3,6 @@ import { Flight } from '@app/entities/flight';
 import { Route } from '@app/entities/route';
 import { AirportRepository } from '@app/repositories/airport-repository';
 import { RouteRepository } from '@app/repositories/route-repository';
-import { SeatTypeRepository } from '@app/repositories/seat-type-repository';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as moment from 'moment';
 
@@ -21,7 +20,6 @@ export class SearchFlightsByRouteService {
   constructor(
     private routeRepository: RouteRepository,
     private airportRepository: AirportRepository,
-    private seatTypeRepository: SeatTypeRepository,
   ) {}
 
   async execute(query?: IRequest): Promise<IResponse> {

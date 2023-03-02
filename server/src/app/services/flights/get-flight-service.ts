@@ -1,6 +1,6 @@
 import { Flight } from '@app/entities/flight';
 import { FlightRepository } from '@app/repositories/flight-repository';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 interface IRequest {
   flightId: string;
@@ -16,7 +16,8 @@ class GetFlightService {
 
   async execute({ flightId }: IRequest): Promise<IResponse> {
     const flight = await this.flightRepository.findById(flightId);
-    if (!flight) throw new Error('Flight not found.');
+    if (!flight)
+      throw new HttpException('Flight not found.', HttpStatus.NOT_FOUND);
 
     return { data: flight.toHTTP() };
   }
