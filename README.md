@@ -3,7 +3,7 @@
 Este projeto é uma extensão do desafio #boraCodar lançado pela Rocketseat. Neste projeto eu adicionei mais algumas páginas para selecionar voo, escolher assento, inserir dados do passageiro e mostrar o cartão de embarque o qual foi criado para o desafio da Rocketseat.
 
 <div align="center">
-    <img src="http://i.imgur.com/RrLI5eph.gif" alt="Project demo"/>
+    <img src="https://github.com/Levysantiago/boarding-pass/blob/main/demo/demo.gif" alt="Project demo"/>
 </div>
 
 Neste projeto eu utilizei as seguintes tecnologias:
