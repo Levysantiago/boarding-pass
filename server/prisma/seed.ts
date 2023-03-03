@@ -254,7 +254,7 @@ async function main() {
           seatTypeId: confortSeats.includes(`${n}${l}`)
             ? seatTypeConfortId
             : seatTypeDefaultId,
-          flightId: flight_GRU_IOS_id2,
+          flightId: flight_IOS_GRU_id2,
         },
       });
 

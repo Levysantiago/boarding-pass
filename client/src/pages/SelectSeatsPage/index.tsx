@@ -112,7 +112,7 @@ export function SelectSeatsPage() {
     <Container>
       <AircraftContainer>
         <AircraftContent>
-          <AircraftCodeText>Airbus RS995</AircraftCodeText>
+          <AircraftCodeText>{`Airbus ${flight?.aircraftCode}`}</AircraftCodeText>
 
           <Divider />
 
