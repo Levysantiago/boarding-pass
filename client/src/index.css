@@ -8,3 +8,26 @@ body {
   background: linear-gradient(to bottom, #8257e5 0%, #271a45 100%) fixed;
   background-color: #30176b;
 }
+
+/*CUSTOMIZING SCROLLBAR*/
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(207, 207, 207);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

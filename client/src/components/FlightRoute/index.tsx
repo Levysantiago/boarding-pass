@@ -43,7 +43,7 @@ export function FlightRoute({ route, flight, onClick }: IProps) {
 
           <TopicContainer>
             <TopicTitle>A partir de</TopicTitle>
-            <TopicPriceText>{`R$ ${flight.seats[0].seatType.price}`}</TopicPriceText>
+            <TopicPriceText>{`R$ ${flight.flightPrice}`}</TopicPriceText>
           </TopicContainer>
         </TopicsContainer>
       </BlockContainer>

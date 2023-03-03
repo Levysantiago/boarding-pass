@@ -86,6 +86,7 @@ export function SelectSeatsPage() {
         flight: {
           arrivalTime: flight.arrivalTime,
           flightTime: flight.flightTime,
+          flightPrice: flight.flightPrice,
           seatCode: seatSelected.code,
           seatPrice: seatSelected.seatType.price,
         },
@@ -103,6 +104,7 @@ export function SelectSeatsPage() {
 
   useEffect(() => {
     fetchFlight();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -128,6 +130,12 @@ export function SelectSeatsPage() {
                       key={`seat-left-${index}`}
                       title={seat.code}
                       description={`R$ ${seat.seatType.price}`}
+                      smallLabel={` ${seat.side}`}
+                      highlightText={
+                        seat.seatType.name === "Confort"
+                          ? "Mais espaço"
+                          : undefined
+                      }
                       disable={seat.occupied}
                       triggerComponent={
                         <SeatButton
@@ -138,6 +146,7 @@ export function SelectSeatsPage() {
                           <SeatIcon
                             isSelected={seatSelected?.code === seat.code}
                             isOccupied={seat.occupied}
+                            isConfort={seat.seatType.name === "Confort"}
                           />
                         </SeatButton>
                       }
@@ -177,6 +186,12 @@ export function SelectSeatsPage() {
                       key={`seat-right-${index}`}
                       title={seat.code}
                       description={`R$ ${seat.seatType.price}`}
+                      smallLabel={` ${seat.side}`}
+                      highlightText={
+                        seat.seatType.name === "Confort"
+                          ? "Mais espaço"
+                          : undefined
+                      }
                       disable={seat.occupied}
                       triggerComponent={
                         <SeatButton
@@ -187,6 +202,7 @@ export function SelectSeatsPage() {
                           <SeatIcon
                             isSelected={seatSelected?.code === seat.code}
                             isOccupied={seat.occupied}
+                            isConfort={seat.seatType.name === "Confort"}
                           />
                         </SeatButton>
                       }

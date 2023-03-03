@@ -19,6 +19,7 @@ interface IFlightProps {
   updatedAt?: Date;
   route?: Route;
   seats?: Seat[];
+  flightPrice: string;
 }
 
 export class Flight {
@@ -32,6 +33,7 @@ export class Flight {
     this.arrivalTime = props.arrivalTime;
     this.terminal = props.terminal;
     this.gate = props.gate;
+    this.flightPrice = props.flightPrice;
     if (props.route) {
       this.route = new Route(props.route, props.route.id);
     }
@@ -69,6 +71,8 @@ export class Flight {
   gate: string;
 
   route?: Route;
+
+  flightPrice: string;
 
   seats?: Seat[];
 

@@ -8,6 +8,7 @@ export interface IFlight {
   boardingEndingTime: string;
   flightTime: string;
   arrivalTime: string;
+  flightPrice: string;
   terminal: string;
   gate: string;
   route?: IRoute;

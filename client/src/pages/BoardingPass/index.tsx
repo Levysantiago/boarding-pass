@@ -7,7 +7,6 @@ import {
   AircraftBlackIcon,
   Badge,
   BadgeTitle,
-  Ball1,
   BoardingInfoContainer,
   ColumnItems,
   Container,
@@ -59,6 +58,7 @@ export function BoardingPass() {
 
   useEffect(() => {
     fetchBoardingPassInfo();
+    // eslint-disable-next-line
   }, []);
 
   return boardingPassInfo ? (

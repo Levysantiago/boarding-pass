@@ -50,6 +50,7 @@ function Home() {
         id: airport.id,
         value: `${airport.state}, ${airport.city} - ${airport.country}`,
       });
+      return airport;
     });
 
     setAirportsDropdownSelection(_airportsDropdownSelection);
@@ -97,12 +98,14 @@ function Home() {
 
   useEffect(() => {
     configureAirportsDropdownSelection();
+    // eslint-disable-next-line
   }, [airports]);
 
   useEffect(() => {
     if (location.search) {
       fetchFlights();
     }
+    // eslint-disable-next-line
   }, [location.search]);
 
   return (

@@ -178,15 +178,6 @@ export const DashedDivider = styled.div`
   right: 0px;
 `;
 
-export const Ball1 = styled.div`
-  width: 15px;
-  height: 30px;
-  border-radius: 0px 150px 150px 0px;
-  position: absolute;
-  top: 183px;
-  left: 0px;
-`;
-
 export const IssueText = styled.span`
   font-size: 14px;
   font-family: "Rubik", sans-serif;

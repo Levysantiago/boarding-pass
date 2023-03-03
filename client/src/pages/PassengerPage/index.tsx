@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { SummaryContext } from "../../components/context/SummaryContext";
@@ -20,6 +20,8 @@ export function PassengerPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { summary } = useContext(SummaryContext);
+
+  // This could be coming from the backend
   const [genders] = useState([
     { id: "0", value: "Masculino" },
     { id: "1", value: "Feminino" },
@@ -45,7 +47,7 @@ export function PassengerPage() {
     if (!summary) {
       navigate({ pathname: "/" });
     }
-  }, []);
+  }, [navigate, summary]);
 
   async function handleSubmit() {
     try {

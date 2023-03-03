@@ -11,6 +11,8 @@ export const TooltipHeader = styled.div`
   padding: 5px 0px;
   background-color: #6a33ee;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const TooltipFooter = styled.div`
@@ -34,7 +36,13 @@ export const TooltipSmallText = styled.span`
   font-family: "Rubik", sans-serif;
   font-weight: 400;
   color: #bea3ff;
-  display: block;
+`;
+
+export const TooltipHighlightText = styled.span`
+  font-size: 8px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+  color: #ffcb11;
 `;
 
 export const TooltipFooterText = styled.span`

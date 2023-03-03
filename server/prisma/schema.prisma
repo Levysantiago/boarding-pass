@@ -28,7 +28,6 @@ model Aircraft {
   lastSeat  String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  Flight    Flight?
 
   @@index([code])
   @@map("aircrafts")
@@ -84,8 +83,8 @@ model Passenger {
 
 model Route {
   id            String   @id
-  airportFromId String   @unique
-  airportToId   String   @unique
+  airportFromId String
+  airportToId   String
   duration      String
   flights       Flight[]
   createdAt     DateTime @default(now())
@@ -97,7 +96,7 @@ model Route {
 model Flight {
   id                 String      @id
   routeId            String
-  aircraftCode       String      @unique
+  aircraftCode       String
   finishBookingTime  DateTime
   boardingTime       DateTime
   boardingEndingTime DateTime
@@ -106,12 +105,12 @@ model Flight {
   terminal           String
   gate               String
   seats              Seat[]
+  flightPrice        String
   passenger          Passenger[]
   createdAt          DateTime    @default(now())
   updatedAt          DateTime    @default(now())
 
-  route    Route    @relation(fields: [routeId], references: [id])
-  aircraft Aircraft @relation(fields: [aircraftCode], references: [code])
+  route Route @relation(fields: [routeId], references: [id])
 
   @@map("flights")
 }

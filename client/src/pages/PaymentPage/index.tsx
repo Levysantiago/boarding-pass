@@ -20,7 +20,7 @@ export function PaymentPage() {
 
   useEffect(() => {
     if (!summary) navigate(-1);
-  }, []);
+  }, [summary, navigate]);
 
   return (
     <Container>

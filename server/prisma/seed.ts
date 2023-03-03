@@ -31,6 +31,16 @@ async function main() {
     },
   });
 
+  const airport_BSB_id = randomUUID();
+  await prisma.airport.create({
+    data: {
+      id: airport_BSB_id,
+      city: 'BSB',
+      state: 'DF',
+      country: 'Brasil',
+    },
+  });
+
   // AIRCRAFTS
   await prisma.aircraft.create({
     data: {
@@ -44,7 +54,7 @@ async function main() {
   await prisma.aircraft.create({
     data: {
       id: randomUUID(),
-      code: 'RS195',
+      code: 'LD195',
       firstSeat: '1A',
       lastSeat: '11F',
     },
@@ -53,7 +63,7 @@ async function main() {
   await prisma.aircraft.create({
     data: {
       id: randomUUID(),
-      code: 'RS235',
+      code: 'BW235',
       firstSeat: '1A',
       lastSeat: '11F',
     },
@@ -66,7 +76,57 @@ async function main() {
       id: route_IOS_GRU_id,
       airportFromId: airport_IOS_id,
       airportToId: airport_GRU_id,
-      duration: '1h',
+      duration: '2 h 20 min',
+    },
+  });
+
+  const route_GRU_IOS_id = randomUUID();
+  await prisma.route.create({
+    data: {
+      id: route_GRU_IOS_id,
+      airportFromId: airport_GRU_id,
+      airportToId: airport_IOS_id,
+      duration: '2 h 20 min',
+    },
+  });
+
+  const route_IOS_BSB_id = randomUUID();
+  await prisma.route.create({
+    data: {
+      id: route_IOS_BSB_id,
+      airportFromId: airport_IOS_id,
+      airportToId: airport_BSB_id,
+      duration: '1 h 45 min',
+    },
+  });
+
+  const route_BSB_IOS_id = randomUUID();
+  await prisma.route.create({
+    data: {
+      id: route_BSB_IOS_id,
+      airportFromId: airport_BSB_id,
+      airportToId: airport_IOS_id,
+      duration: '1 h 45 min',
+    },
+  });
+
+  const route_GRU_BSB_id = randomUUID();
+  await prisma.route.create({
+    data: {
+      id: route_GRU_BSB_id,
+      airportFromId: airport_GRU_id,
+      airportToId: airport_BSB_id,
+      duration: '1 h 35 min',
+    },
+  });
+
+  const route_BSB_GRU_id = randomUUID();
+  await prisma.route.create({
+    data: {
+      id: route_BSB_GRU_id,
+      airportFromId: airport_BSB_id,
+      airportToId: airport_GRU_id,
+      duration: '1 h 35 min',
     },
   });
 
@@ -78,12 +138,64 @@ async function main() {
       routeId: route_IOS_GRU_id,
       terminal: '1',
       gate: '1',
-      finishBookingTime: new Date('2023-02-28T13:34:22.107Z'),
-      boardingEndingTime: new Date('2023-03-01T13:20:22.107Z'),
-      boardingTime: new Date('2023-03-01T12:34:22.107Z'),
-      flightTime: new Date('2023-03-01T13:34:22.107Z'),
-      arrivalTime: new Date('2023-03-01T14:34:22.107Z'),
+      flightPrice: '1800.00',
+      finishBookingTime: new Date('2023-06-29T09:15:00.107Z'),
+      boardingEndingTime: new Date('2023-06-29T09:15:00.107Z'),
+      boardingTime: new Date('2023-06-29T08:30:00.107Z'),
+      flightTime: new Date('2023-06-29T09:30:00.107Z'),
+      arrivalTime: new Date('2023-06-29T11:50:00.107Z'),
       aircraftCode: 'RS995',
+    },
+  });
+
+  const flight_IOS_GRU_id2 = randomUUID();
+  await prisma.flight.create({
+    data: {
+      id: flight_IOS_GRU_id2,
+      routeId: route_IOS_GRU_id,
+      terminal: '1',
+      gate: '1',
+      flightPrice: '1500.00',
+      finishBookingTime: new Date('2023-06-29T15:15:00.107Z'),
+      boardingEndingTime: new Date('2023-06-29T15:15:00.107Z'),
+      boardingTime: new Date('2023-06-29T14:30:00.107Z'),
+      flightTime: new Date('2023-06-29T15:30:00.107Z'),
+      arrivalTime: new Date('2023-06-29T17:50:00.107Z'),
+      aircraftCode: 'LD195',
+    },
+  });
+
+  const flight_GRU_IOS_id = randomUUID();
+  await prisma.flight.create({
+    data: {
+      id: flight_GRU_IOS_id,
+      routeId: route_GRU_IOS_id,
+      terminal: '2',
+      gate: '3',
+      flightPrice: '2000.00',
+      finishBookingTime: new Date('2023-07-01T09:15:00.107Z'),
+      boardingEndingTime: new Date('2023-07-01T09:15:00.107Z'),
+      boardingTime: new Date('2023-07-01T08:30:00.107Z'),
+      flightTime: new Date('2023-07-01T09:30:00.107Z'),
+      arrivalTime: new Date('2023-07-01T11:50:00.107Z'),
+      aircraftCode: 'RS995',
+    },
+  });
+
+  const flight_GRU_IOS_id2 = randomUUID();
+  await prisma.flight.create({
+    data: {
+      id: flight_GRU_IOS_id2,
+      routeId: route_GRU_IOS_id,
+      terminal: '2',
+      gate: '3',
+      flightPrice: '1700.00',
+      finishBookingTime: new Date('2023-07-01T13:15:00.107Z'),
+      boardingEndingTime: new Date('2023-07-01T13:15:00.107Z'),
+      boardingTime: new Date('2023-07-01T12:30:00.107Z'),
+      flightTime: new Date('2023-07-01T13:30:00.107Z'),
+      arrivalTime: new Date('2023-07-01T15:50:00.107Z'),
+      aircraftCode: 'LD195',
     },
   });
 
@@ -94,7 +206,7 @@ async function main() {
     data: {
       id: seatTypeDefaultId,
       name: 'Default',
-      price: '70.00',
+      price: '30.00',
     },
   });
 
@@ -111,15 +223,62 @@ async function main() {
   // SEATS
   const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  const side = {
+    A: 'window',
+    B: 'middle',
+    C: 'corridor',
+    D: 'corridor',
+    E: 'middle',
+    F: 'window',
+  };
+  const confortSeats = ['1A', '1B', '1C', '1D', '1E', '1F'];
   numbers.map(async (n) => {
     letters.map(async (l) => {
       await prisma.seat.create({
         data: {
           id: randomUUID(),
           code: `${n}${l}`,
-          side: 'window',
-          seatTypeId: seatTypeDefaultId,
+          side: side[l],
+          seatTypeId: confortSeats.includes(`${n}${l}`)
+            ? seatTypeConfortId
+            : seatTypeDefaultId,
           flightId: flight_IOS_GRU_id,
+        },
+      });
+
+      await prisma.seat.create({
+        data: {
+          id: randomUUID(),
+          code: `${n}${l}`,
+          side: side[l],
+          seatTypeId: confortSeats.includes(`${n}${l}`)
+            ? seatTypeConfortId
+            : seatTypeDefaultId,
+          flightId: flight_GRU_IOS_id2,
+        },
+      });
+
+      await prisma.seat.create({
+        data: {
+          id: randomUUID(),
+          code: `${n}${l}`,
+          side: side[l],
+          seatTypeId: confortSeats.includes(`${n}${l}`)
+            ? seatTypeConfortId
+            : seatTypeDefaultId,
+          flightId: flight_GRU_IOS_id,
+        },
+      });
+
+      await prisma.seat.create({
+        data: {
+          id: randomUUID(),
+          code: `${n}${l}`,
+          side: side[l],
+          seatTypeId: confortSeats.includes(`${n}${l}`)
+            ? seatTypeConfortId
+            : seatTypeDefaultId,
+          flightId: flight_GRU_IOS_id2,
         },
       });
     });

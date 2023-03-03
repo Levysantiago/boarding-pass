@@ -4,6 +4,7 @@ import seatSelectedIcon from "../../assets/seat-selected.svg";
 import seatHoveredIcon from "../../assets/seat-hovered.svg";
 import seatFreeIcon from "../../assets/seat-free.svg";
 import seatOccupiedIcon from "../../assets/seat-occupied.svg";
+import seatConfortIcon from "../../assets/seat-confort.svg";
 
 export const Container = styled.div`
   display: flex;
@@ -89,11 +90,17 @@ export const SeatButton = styled.button.attrs({ type: "button" })`
 `;
 
 export const SeatIcon = styled.img.attrs(
-  (props: { isSelected: boolean; isOccupied?: boolean }) => ({
+  (props: {
+    isSelected: boolean;
+    isOccupied?: boolean;
+    isConfort?: boolean;
+  }) => ({
     src: props.isOccupied
       ? seatOccupiedIcon
       : props.isSelected
       ? seatSelectedIcon
+      : props.isConfort
+      ? seatConfortIcon
       : seatFreeIcon,
 
     onMouseEnter: (event: React.MouseEvent) => {
@@ -106,12 +113,16 @@ export const SeatIcon = styled.img.attrs(
     onMouseLeave: (event: React.MouseEvent) => {
       const element: HTMLImageElement = event.target as HTMLImageElement;
       if (!props.isSelected && !props.isOccupied) {
-        element.src = seatFreeIcon;
+        element.src = props.isConfort ? seatConfortIcon : seatFreeIcon;
       }
     },
   })
 )(
-  (props: { isSelected: boolean; isOccupied?: boolean }) => `
+  (props: {
+    isSelected: boolean;
+    isOccupied?: boolean;
+    isConfort?: boolean;
+  }) => `
   width: 25px;
   cursor: ${props.isOccupied ? "default" : "pointer"};
 `
