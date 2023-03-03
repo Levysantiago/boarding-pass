@@ -81,6 +81,9 @@ export class Flight {
   toHTTP(): Flight {
     const flight: any = new Flight(this, this.id);
 
+    flight.flightDate = moment(flight.flightTime)
+      .locale('br')
+      .format('DD/MM/YYYY');
     flight.flightTime = moment(flight.flightTime).locale('br').format('LT');
     flight.boardingTime = moment(flight.boardingTime).locale('br').format('LT');
     flight.boardingEndingTime = moment(flight.boardingEndingTime)

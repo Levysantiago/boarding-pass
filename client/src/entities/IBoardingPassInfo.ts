@@ -22,6 +22,7 @@ export interface IBoardingPassInfo {
     boardingTime: string;
     boardingEndingTime: string;
     flightTime: string;
+    flightDate: string;
     arrivalTime: string;
     terminal: string;
     gate: string;

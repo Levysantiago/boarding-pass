@@ -177,6 +177,7 @@ export function SelectSeatsPage() {
                       key={`seat-right-${index}`}
                       title={seat.code}
                       description={`R$ ${seat.seatType.price}`}
+                      disable={seat.occupied}
                       triggerComponent={
                         <SeatButton
                           onClick={() => {
@@ -185,6 +186,7 @@ export function SelectSeatsPage() {
                         >
                           <SeatIcon
                             isSelected={seatSelected?.code === seat.code}
+                            isOccupied={seat.occupied}
                           />
                         </SeatButton>
                       }
