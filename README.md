@@ -14,3 +14,79 @@ Neste projeto eu utilizei as seguintes tecnologias:
 - Nest.js
 - Prisma.js
 - SQLite
+
+---
+
+## Rodando o projeto
+
+## Server
+
+### Instalando dependências no server
+
+```
+cd server
+```
+
+```
+yarn
+```
+
+```
+npm install
+```
+
+### Rodando migrations
+
+Este comando irá criar o banco de dados na pasta do prisma.
+
+```
+npx prisma migrate dev
+```
+
+### Criando registros no banco de dados
+
+Este comando roda o arquivo `prisma/seed.ts` para criar registros no banco de dados.
+
+```
+npx prisma db seed
+```
+
+### Rodando server
+
+```
+yarn start:dev
+```
+
+```
+npm run start:dev
+```
+
+O projeto irá rodar no http://localhost:3333.
+
+## Client
+
+### Instalando dependências no client
+
+```
+cd client
+```
+
+```
+yarn
+```
+
+```
+npm install
+```
+
+### Rodando client
+
+```
+yarn start
+```
+
+```
+npm start
+```
+
+O projeto irá rodar no http://localhost:3000.
