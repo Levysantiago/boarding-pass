@@ -79,6 +79,11 @@ export const AircraftCodeText = styled.span`
   right: 20px;
 `;
 
+export const FlightDate = styled(AircraftCodeText)`
+  right: none;
+  left: 20px;
+`;
+
 export const AircraftIcon = styled.img.attrs({
   src: aircraftIcon,
   alt: "Aircraft icon",

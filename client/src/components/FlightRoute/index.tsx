@@ -5,6 +5,7 @@ import {
   AircraftIcon,
   BlockContainer,
   Container,
+  FlightDate,
   Title,
   TitleContainer,
   TopicContainer,
@@ -49,6 +50,7 @@ export function FlightRoute({ route, flight, onClick }: IProps) {
       </BlockContainer>
 
       <AircraftCodeText>{flight.aircraftCode}</AircraftCodeText>
+      <FlightDate>{flight.flightDate}</FlightDate>
     </Container>
   );
 }

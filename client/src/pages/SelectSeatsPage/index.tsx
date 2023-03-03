@@ -86,6 +86,7 @@ export function SelectSeatsPage() {
         flight: {
           arrivalTime: flight.arrivalTime,
           flightTime: flight.flightTime,
+          flightDate: flight.flightDate,
           flightPrice: flight.flightPrice,
           seatCode: seatSelected.code,
           seatPrice: seatSelected.seatType.price,

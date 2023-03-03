@@ -9,6 +9,7 @@ export interface ISummaryData {
 
   flight?: {
     flightTime: string;
+    flightDate: string;
     arrivalTime: string;
     flightPrice: string;
     seatCode: string;

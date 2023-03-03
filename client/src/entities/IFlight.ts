@@ -7,6 +7,7 @@ export interface IFlight {
   boardingTime: string;
   boardingEndingTime: string;
   flightTime: string;
+  flightDate: string;
   arrivalTime: string;
   flightPrice: string;
   terminal: string;

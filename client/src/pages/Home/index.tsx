@@ -22,7 +22,7 @@ function Home() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [selectedOrigin, setSelectedOrigin] = useState(0);
+  const [selectedOrigin, setSelectedOrigin] = useState(1);
   const [selectedDestination, setSelectedDestination] = useState(0);
   const [airports, setAirports] = useState<IAirport[]>([]);
   const [airportsDropdownSelection, setAirportsDropdownSelection] = useState<

@@ -20,9 +20,10 @@ export function FlightSummary({ summary }: IProps) {
       <Title>Resumo de voo</Title>
       <FlightSummaryContent>
         <SummaryText>{`${summary.flight.flightTime} ${summary.route.cityFrom} -> ${summary.flight.arrivalTime} ${summary.route.cityTo}`}</SummaryText>
-        <SummaryText>{`Duração ${summary.route.duration}`}</SummaryText>
-        <SummaryText>{"Voo Direto"}</SummaryText>
-        <SummaryText>{`Assento ${summary.flight.seatCode}`}</SummaryText>
+        <SummaryText>{`Duração: ${summary.route.duration}`}</SummaryText>
+        <SummaryText>{`Data: ${summary.flight.flightDate}`}</SummaryText>
+        <SummaryText>{"Voo: Direto"}</SummaryText>
+        <SummaryText>{`Assento: ${summary.flight.seatCode}`}</SummaryText>
 
         <FinalPriceContainer>
           <FinalPriceLabel>Preço final</FinalPriceLabel>
