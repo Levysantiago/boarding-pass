@@ -68,7 +68,7 @@ export const FinalPriceValue = styled.span`
   margin-bottom: 4px;
 `;
 
-export const PassengerInfo = styled.div`
+export const PassengerForm = styled.form`
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { ISummaryData } from "../context/ISummaryContext";
 import {
   FinalPriceContainer,
   FinalPriceLabel,
@@ -8,19 +10,23 @@ import {
   Title,
 } from "./styles";
 
-export function FlightSummary() {
+export interface IProps {
+  summary: ISummaryData;
+}
+
+export function FlightSummary({ summary }: IProps) {
   return (
     <FlightSummaryContainer>
       <Title>Resumo de voo</Title>
       <FlightSummaryContent>
-        <SummaryText>{"17:00 GRU -> 18:30 SFO"}</SummaryText>
-        <SummaryText>{"Duração 1 h 30 min"}</SummaryText>
+        <SummaryText>{`${summary.flight?.flightTime} ${summary.route?.cityFrom} -> ${summary.flight?.arrivalTime} ${summary.route?.cityTo}`}</SummaryText>
+        <SummaryText>{`Duração ${summary.route?.duration}`}</SummaryText>
         <SummaryText>{"Voo Direto"}</SummaryText>
-        <SummaryText>{"Assento 10A"}</SummaryText>
+        <SummaryText>{`Assento ${summary.flight?.seatCode}`}</SummaryText>
 
         <FinalPriceContainer>
           <FinalPriceLabel>Preço final</FinalPriceLabel>
-          <FinalPriceValue>R$ 255,00</FinalPriceValue>
+          <FinalPriceValue>{`R$ ${summary.flight?.seatPrice}`}</FinalPriceValue>
         </FinalPriceContainer>
       </FlightSummaryContent>
     </FlightSummaryContainer>

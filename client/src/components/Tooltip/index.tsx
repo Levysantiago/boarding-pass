@@ -12,15 +12,21 @@ interface IProps {
   triggerComponent: JSX.Element;
   title: string;
   description: string;
+  disable?: boolean;
 }
 
-export function Tooltip({ triggerComponent, title, description }: IProps) {
+export function Tooltip({
+  triggerComponent,
+  title,
+  description,
+  disable,
+}: IProps) {
   return (
     <ReactTooltip.Provider>
       <ReactTooltip.Root delayDuration={1}>
         <ReactTooltip.Trigger asChild>{triggerComponent}</ReactTooltip.Trigger>
 
-        <TooltipContent side="top">
+        <TooltipContent side="top" hidden={disable}>
           <TooltipHeader>
             <TooltipTitle>{title}</TooltipTitle>
           </TooltipHeader>

@@ -1,7 +1,7 @@
 import { Passenger } from '@app/entities/passenger';
 import { PassengerRepository } from '@app/repositories/passenger-repository';
 import { SeatRepository } from '@app/repositories/seat-repository';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 interface IRequest {
   firstName: string;
@@ -41,7 +41,11 @@ export default class CreatePassengerService {
     });
     const seat = seats[0];
     if (!seat) throw new Error('Seat not found.');
-    if (seat.occupied) throw new Error('Seat is already occupied.');
+    if (seat.occupied)
+      throw new HttpException(
+        'Seat is already occupied.',
+        HttpStatus.BAD_REQUEST,
+      );
 
     // Creating passenger
     const passenger = new Passenger({

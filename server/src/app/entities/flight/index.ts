@@ -1,5 +1,6 @@
 import { Exclude, instanceToPlain } from 'class-transformer';
 import { randomUUID } from 'crypto';
+import * as moment from 'moment';
 import { orderSeatsByNumber } from 'src/helpers/order-seats-by-number';
 import { Route } from '../route';
 import { Seat } from '../seat';
@@ -78,7 +79,17 @@ export class Flight {
   updatedAt: Date;
 
   toHTTP(): Flight {
-    const flight = new Flight(this, this.id);
+    const flight: any = new Flight(this, this.id);
+
+    flight.flightTime = moment(flight.flightTime).locale('br').format('LT');
+    flight.boardingTime = moment(flight.boardingTime).locale('br').format('LT');
+    flight.boardingEndingTime = moment(flight.boardingEndingTime)
+      .locale('br')
+      .format('LT');
+    flight.finishBookingTime = moment(flight.finishBookingTime)
+      .locale('br')
+      .format('LT');
+    flight.arrivalTime = moment(flight.arrivalTime).locale('br').format('LT');
 
     if (flight.seats) {
       flight.seats = flight.seats.map((seat) => {

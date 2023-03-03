@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom/client";
+import { SummaryProvider } from "./components/context/SummaryProvider";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { MyRoutes } from "./routes";
@@ -6,7 +7,7 @@ import { MyRoutes } from "./routes";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(MyRoutes);
+root.render(<SummaryProvider>{MyRoutes}</SummaryProvider>);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

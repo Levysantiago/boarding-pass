@@ -4,7 +4,6 @@ import { Route } from '@app/entities/route';
 import { AirportRepository } from '@app/repositories/airport-repository';
 import { RouteRepository } from '@app/repositories/route-repository';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import * as moment from 'moment';
 
 interface IRequest {
   airportFromId?: string;
@@ -57,18 +56,6 @@ export class SearchFlightsByRouteService {
     route.airportTo = airportTo.toHTTP();
 
     const flights = route.flights.map((flight: any) => {
-      flight.flightTime = moment(flight.flightTime).locale('br').format('LT');
-      flight.boardingTime = moment(flight.boardingTime)
-        .locale('br')
-        .format('LT');
-      flight.boardingEndingTime = moment(flight.boardingEndingTime)
-        .locale('br')
-        .format('LT');
-      flight.finishBookingTime = moment(flight.finishBookingTime)
-        .locale('br')
-        .format('LT');
-      flight.arrivalTime = moment(flight.arrivalTime).locale('br').format('LT');
-
       return flight.toHTTP();
     });
 

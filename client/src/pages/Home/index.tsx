@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Dropdown, IDropdownItem } from "../../components/Dropdown";
 import { FlightRoute } from "../../components/FlightRoute";
 import { getAirportsService } from "../../services/getAirportsService";
@@ -16,6 +16,7 @@ import { getFlightsService } from "../../services/getFlightsService";
 import { IFlight } from "../../entities/IFlight";
 import { IServerError } from "../../error/IServerError";
 import { IRoute } from "../../entities/IRoute";
+import { SummaryContext } from "../../components/context/SummaryContext";
 
 function Home() {
   const navigate = useNavigate();
@@ -29,6 +30,8 @@ function Home() {
   >([]);
   const [flights, setFlights] = useState<IFlight[]>([]);
   const [route, setRoute] = useState<IRoute>();
+
+  const { setSummary } = useContext(SummaryContext);
 
   async function fetchAirportsData() {
     try {
@@ -68,6 +71,26 @@ function Home() {
       alert(data.message);
     }
   }
+
+  function handleOnFlightClick(flight: IFlight) {
+    if (route) {
+      setSummary({
+        route: {
+          cityFrom: route.airportFrom.city,
+          cityTo: route.airportTo.city,
+          duration: route.duration,
+        },
+      });
+
+      navigate({
+        pathname: "/select-seats",
+        search: `${createSearchParams({
+          flightId: flight.id,
+        })}`,
+      });
+    }
+  }
+
   useEffect(() => {
     fetchAirportsData();
   }, []);
@@ -134,12 +157,7 @@ function Home() {
                     flight={flight}
                     key={`home-flight-${index}`}
                     onClick={() => {
-                      navigate({
-                        pathname: "/select-seats",
-                        search: `${createSearchParams({
-                          flightId: flight.id,
-                        })}`,
-                      });
+                      handleOnFlightClick(flight);
                     }}
                   />
                 );

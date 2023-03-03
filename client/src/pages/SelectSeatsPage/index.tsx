@@ -16,21 +16,23 @@ import {
   SeatsContainer,
 } from "./styles";
 import { Button } from "../../components/Button";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getFlightService } from "../../services/getFlightService";
 import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { IFlight } from "../../entities/IFlight";
 import { IServerError } from "../../error/IServerError";
 import { ISeat } from "../../entities/ISeat";
 import { Tooltip } from "../../components/Tooltip";
+import { SummaryContext } from "../../components/context/SummaryContext";
 
 export function SelectSeatsPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [, setFlight] = useState<IFlight>();
+  const [flight, setFlight] = useState<IFlight>();
   const [seatsLeft, setSeatsLeft] = useState<ISeat[]>([]);
   const [seatsRight, setSeatsRight] = useState<ISeat[]>([]);
-  const [seatCodeSelected, setSeatCodeSelected] = useState<string>();
+  const [seatSelected, setSeatSelected] = useState<ISeat>();
+  const { setSummary, summary } = useContext(SummaryContext);
 
   async function fetchFlight() {
     const params = new URLSearchParams(location.search);
@@ -74,6 +76,31 @@ export function SelectSeatsPage() {
     }
   }
 
+  function handleOnClickContinue() {
+    const params = new URLSearchParams(location.search);
+    const flightId = params.get("flightId");
+
+    if (flight && seatSelected && flightId) {
+      setSummary({
+        ...summary,
+        flight: {
+          arrivalTime: flight.arrivalTime,
+          flightTime: flight.flightTime,
+          seatCode: seatSelected.code,
+          seatPrice: seatSelected.seatType.price,
+        },
+      });
+
+      navigate({
+        pathname: "/passenger",
+        search: `${createSearchParams({
+          flightId,
+          seatCode: seatSelected.code,
+        })}`,
+      });
+    }
+  }
+
   useEffect(() => {
     fetchFlight();
   }, []);
@@ -101,14 +128,16 @@ export function SelectSeatsPage() {
                       key={`seat-left-${index}`}
                       title={seat.code}
                       description={`R$ ${seat.seatType.price}`}
+                      disable={seat.occupied}
                       triggerComponent={
                         <SeatButton
                           onClick={() => {
-                            setSeatCodeSelected(seat.code);
+                            setSeatSelected(seat);
                           }}
                         >
                           <SeatIcon
-                            isSelected={seatCodeSelected === seat.code}
+                            isSelected={seatSelected?.code === seat.code}
+                            isOccupied={seat.occupied}
                           />
                         </SeatButton>
                       }
@@ -151,11 +180,11 @@ export function SelectSeatsPage() {
                       triggerComponent={
                         <SeatButton
                           onClick={() => {
-                            setSeatCodeSelected(seat.code);
+                            setSeatSelected(seat);
                           }}
                         >
                           <SeatIcon
-                            isSelected={seatCodeSelected === seat.code}
+                            isSelected={seatSelected?.code === seat.code}
                           />
                         </SeatButton>
                       }
@@ -176,21 +205,8 @@ export function SelectSeatsPage() {
             />
             <Button
               title="Continuar"
-              disabled={!seatCodeSelected}
-              onClick={() => {
-                const params = new URLSearchParams(location.search);
-                const flightId = params.get("flightId");
-
-                if (flightId && seatCodeSelected) {
-                  navigate({
-                    pathname: "/passenger",
-                    search: `${createSearchParams({
-                      flightId,
-                      seatCode: seatCodeSelected,
-                    })}`,
-                  });
-                }
-              }}
+              disabled={!seatSelected}
+              onClick={handleOnClickContinue}
             />
           </ButtonsContainer>
         </AircraftContent>

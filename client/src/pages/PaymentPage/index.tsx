@@ -1,4 +1,7 @@
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
+import { SummaryContext } from "../../components/context/SummaryContext";
 import { FlightSummary } from "../../components/FlightSummary";
 import {
   BoldText,
@@ -12,9 +15,16 @@ import {
 } from "./styles";
 
 export function PaymentPage() {
+  const { summary } = useContext(SummaryContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!summary) navigate(-1);
+  }, []);
+
   return (
     <Container>
-      <FlightSummary />
+      <FlightSummary summary={summary!} />
 
       <PaymentInfoContainer>
         <Title>Pagamento via PIX</Title>

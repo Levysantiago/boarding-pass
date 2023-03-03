@@ -3,6 +3,7 @@ import styled from "styled-components";
 import seatSelectedIcon from "../../assets/seat-selected.svg";
 import seatHoveredIcon from "../../assets/seat-hovered.svg";
 import seatFreeIcon from "../../assets/seat-free.svg";
+import seatOccupiedIcon from "../../assets/seat-occupied.svg";
 
 export const Container = styled.div`
   display: flex;
@@ -87,26 +88,32 @@ export const SeatButton = styled.button.attrs({ type: "button" })`
   background-color: transparent;
 `;
 
-export const SeatIcon = styled.img.attrs((props: { isSelected: boolean }) => ({
-  src: props.isSelected ? seatSelectedIcon : seatFreeIcon,
+export const SeatIcon = styled.img.attrs(
+  (props: { isSelected: boolean; isOccupied?: boolean }) => ({
+    src: props.isOccupied
+      ? seatOccupiedIcon
+      : props.isSelected
+      ? seatSelectedIcon
+      : seatFreeIcon,
 
-  onMouseEnter: (event: React.MouseEvent) => {
-    const element: HTMLImageElement = event.target as HTMLImageElement;
+    onMouseEnter: (event: React.MouseEvent) => {
+      const element: HTMLImageElement = event.target as HTMLImageElement;
 
-    if (!props.isSelected) {
-      element.src = seatHoveredIcon;
-    }
-  },
-  onMouseLeave: (event: React.MouseEvent) => {
-    const element: HTMLImageElement = event.target as HTMLImageElement;
-    if (!props.isSelected) {
-      element.src = seatFreeIcon;
-    }
-  },
-}))(
-  (props: { isSelected: boolean }) => `
+      if (!props.isSelected && !props.isOccupied) {
+        element.src = seatHoveredIcon;
+      }
+    },
+    onMouseLeave: (event: React.MouseEvent) => {
+      const element: HTMLImageElement = event.target as HTMLImageElement;
+      if (!props.isSelected && !props.isOccupied) {
+        element.src = seatFreeIcon;
+      }
+    },
+  })
+)(
+  (props: { isSelected: boolean; isOccupied?: boolean }) => `
   width: 25px;
-  cursor: pointer;
+  cursor: ${props.isOccupied ? "default" : "pointer"};
 `
 );
 
