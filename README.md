@@ -21,15 +21,17 @@ Neste projeto eu utilizei as seguintes tecnologias:
 
 ### Instalando dependências no server
 
-```
+```bash
 cd server
 ```
 
-```
+```bash
 yarn
 ```
 
-```
+ou
+
+```bash
 npm install
 ```
 
@@ -37,7 +39,7 @@ npm install
 
 Este comando irá criar o banco de dados na pasta do prisma.
 
-```
+```bash
 npx prisma migrate dev
 ```
 
@@ -45,17 +47,19 @@ npx prisma migrate dev
 
 Este comando roda o arquivo `prisma/seed.ts` para criar registros no banco de dados.
 
-```
+```bash
 npx prisma db seed
 ```
 
 ### Rodando server
 
-```
+```bash
 yarn start:dev
 ```
 
-```
+ou
+
+```bash
 npm run start:dev
 ```
 
@@ -65,25 +69,29 @@ O projeto irá rodar no http://localhost:3333.
 
 ### Instalando dependências no client
 
-```
+```bash
 cd client
 ```
 
-```
+```bash
 yarn
 ```
 
-```
+ou
+
+```bash
 npm install
 ```
 
 ### Rodando client
 
-```
+```bash
 yarn start
 ```
 
-```
+ou
+
+```bash
 npm start
 ```
 
